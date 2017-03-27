@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Mon Mar  6 18:21:54 2017 Kévin Laspougeas
-** Last update Tue Mar 28 00:28:23 2017 Kévin Laspougeas
+** Last update Tue Mar 28 01:01:42 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -45,12 +45,18 @@ void	check_mnemo(char *str, int l)
 
 void	check_code(const int fd, const int fd_out, t_list *list)
 {
-  char	*line;
-  int	lines;
+  char		*line;
+  int		lines;
+  int		r;
 
   lines = 1;
   while ((line = get_next_line(fd)) != NULL)
     {
+      if ((r = line_is_label(line)) >= 1)
+	{
+	  add_label(line, list, lines);
+	  line = &line[r + 1];
+	}
       if (line[0] != COMMENT_CHAR && my_strncmp(line, NAME_CMD_STRING,
 						my_strlen(NAME_CMD_STRING)) &&
 	  my_strncmp(line, COMMENT_CMD_STRING,
@@ -87,7 +93,6 @@ int	main(int ac, char **av)
 	return (84);
       list = make_list();
       check_code(fd, fd_out, &list);
-      //      interpret(fd);
       close(fd);
       close(fd_out);
       return (0);

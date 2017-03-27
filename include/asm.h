@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar  6 18:25:42 2017 Kévin Laspougeas
-** Last update Mon Mar 27 22:58:48 2017 Kévin Laspougeas
+** Last update Tue Mar 28 01:04:17 2017 Kévin Laspougeas
 */
 
 #ifndef		__ASM_H__
@@ -18,8 +18,8 @@
 
 typedef struct	s_instruct
 {
-  char			name;
-  unsigned char		addr;
+  char			*name;
+  int			addr;
   unsigned char		**args;
   struct s_inst		*next;
   struct s_inst 	*prev;

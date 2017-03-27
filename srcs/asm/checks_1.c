@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Fri Mar 24 14:54:14 2017 Kévin Laspougeas
-** Last update Tue Mar 28 00:27:07 2017 Kévin Laspougeas
+** Last update Tue Mar 28 01:06:45 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -18,10 +18,12 @@ int	is_label(const char *str);
 int	check_live(char *str, t_list *list)
 {
   int		i;
+  char		c;
   t_inst	live;
 
   i = 0;
-  live.name = 1;
+  c = 1;
+  live.name = my_strdup(&c);
   if (is_ind(str) != 1 || (my_getnbr(&str[1]) <= 0 || my_getnbr(&str[1]) > 4))
     return (0);
   live.addr = list->size - (T_IND + 1);
@@ -34,7 +36,7 @@ int	check_ld(char *str, t_list *list, char nme)
   t_inst	ld;
   
   i = 0;
-  ld.name = nme;
+  ld.name = my_strdup(&nme);
   if (str == NULL)
     return (0);
   while (str[i] != NULL && str[i] != SEPARATOR_CHAR)
@@ -52,10 +54,12 @@ int	check_ld(char *str, t_list *list, char nme)
 int	check_st(char *str, t_list *list)
 {
   int		i;
+  char		c;
   t_inst	st;
 
   i = 0;
-  st.name = 3;
+  c = 3;
+  st.name = my_strdup(&c);
   if (str == NULL || my_strlen(str) < 4 || str[0] != 'r')
     return (0);
   while (str[i] != NULL && str[i] != SEPARATOR_CHAR)
@@ -77,7 +81,7 @@ int	check_add_sub(char *str, t_list *list, char nme)
   t_inst	add_sub;
 
   i = 0;
-  add_sub.name = nme;
+  add_sub.name = my_strdup(&nme);
   if (str == NULL || my_strlen(str) < 8 || str[0] != 'r')
     return (0);
   while (str[i] != NULL && str[i] != SEPARATOR_CHAR)
@@ -104,7 +108,7 @@ int	check_and(char *str, t_list *list, char nme)
   t_inst	and;
 
   i = 0;
-  and.name = nme;
+  and.name = my_strdup(&nme);
   if (str == NULL ||
       (str[0] != 'r' && str[0] != DIRECT_CHAR && my_str_isnum(str) != 1))
     return (0);
