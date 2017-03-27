@@ -5,74 +5,79 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Fri Mar 24 14:54:14 2017 Kévin Laspougeas
-** Last update Mon Mar 27 17:47:15 2017 Kévin Laspougeas
+** Last update Tue Mar 28 00:27:07 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
 
-int	check_live(char *str, const int fd_out)
+int	is_reg(const char *str);
+int	is_dir(const char *str);
+int	is_ind(const char *str);
+int	is_label(const char *str);
+
+int	check_live(char *str, t_list *list)
 {
-  int	i;
-  char	buff[6];
+  int		i;
+  t_inst	live;
 
   i = 0;
-  if (str == NULL || str[0] != DIRECT_CHAR || my_strlen(str) > 2) ||
-    (my_getnbr(&str[1]) <= 0 || my_getnbr(&str[1]) > 4)
+  live.name = 1;
+  if (is_ind(str) != 1 || (my_getnbr(&str[1]) <= 0 || my_getnbr(&str[1]) > 4))
     return (0);
-  buff[0] = 1;
-  buff[1] = buff[2] = buff[3] = 0;
-  buff[4] = &str[1] - '0';
-  write(fd_out, buff, 5);
-  return (1);
+  live.addr = list->size - (T_IND + 1);
+  return (fill_instruction(str, &live, list));
 }
 
-int	check_ld(char *str, const int fd_out)
+int	check_ld(char *str, t_list *list, char nme)
 {
-  int	i;
-
+  int		i;
+  t_inst	ld;
+  
   i = 0;
+  ld.name = nme;
   if (str == NULL)
     return (0);
   while (str[i] != NULL && str[i] != SEPARATOR_CHAR)
     i++;
-  if (str[i] == NULL || str[i + 1] != 'r')
-    return (0);
-  if (str[i + 2] == NULL || my_getnbr(&str[i + 2]) <= 0 ||
-      my_getnbr(&str[i + 2]) > REG_NUMBER)
+  if (str[i] == NULL || is_reg(&str[i + 1]) != 1)
     return (0);
   str[i] = '\0';
-  if (str[0] != DIRECT_CHAR && my_str_isnum(str) != 1)
+  if (is_dir(str) != 1 && is_reg(str) != 1 && is_ind(str) != 1 &&
+      is_label(str) != 1)
     return (0);
   str[i] = SEPARATOR_CHAR;
-  return (1);
+  return (fill_instruction(str, &st, list));
 }
 
-int	check_st(char *str)
+int	check_st(char *str, t_list *list)
 {
-  int	i;
+  int		i;
+  t_inst	st;
 
   i = 0;
+  st.name = 3;
   if (str == NULL || my_strlen(str) < 4 || str[0] != 'r')
     return (0);
   while (str[i] != NULL && str[i] != SEPARATOR_CHAR)
     i++;
-  if (str[i] == NULL || (my_str_isnum(&str[i + 1]) != 1 && str[i + 1] != 'r')
-      || (str[i + 1] == 'r' && (my_gethbr(&str[i + 1]) <= 0 ||
-				my_getnbr(&str[i + 1]) > REG_NUMBER)))
+  if (is_ind(&str[i + 1]) != 1 && is_reg(&str[i + 1]) != 1)
     return (0);
   str[i] = '\0';
-  if (my_getnbr(&str[1]) <= 0 || my_getnbr(&str[1]) > REG_NUMBER)
+  if (is_reg(str) != 1)
     return (0);
   str[i] = SEPARATOR_CHAR;
+  fill_instruction(str, &st, list);
   return (1);
 }
 
-int	check_add_sub(char *str)
+int	check_add_sub(char *str, t_list *list, char nme)
 {
-  int	i;
-  int	y;
+  int		i;
+  int		y;
+  t_inst	add_sub;
 
   i = 0;
+  add_sub.name = nme;
   if (str == NULL || my_strlen(str) < 8 || str[0] != 'r')
     return (0);
   while (str[i] != NULL && str[i] != SEPARATOR_CHAR)
@@ -80,27 +85,27 @@ int	check_add_sub(char *str)
   y = str[i] != NULL ? i : 0;
   while (str[i] != NULL && str[i] != SEPARATOR_CHAR)
     i++;
-  if (str[i] == NULL || str[i + 1] != 'r' || my_getnbr(&str[i + 2]) <= 0 ||
-      my_getnbr(&str[i + 2]) > REG_NUMBER)
+  if (is_reg(&str[i + 1]) != 1)
     return (0);
   str[i] = '\0';
-  if (str[y + 1] != 'r' || my_getnbr(&str[y + 2]) <= 0 ||
-      my_getnbr(&str[y + 2]) > REG_NUMBER)
+  if (is_reg(&str[y + 1]) != 1)
     return (0);
   str[y] = '\0';
-  if (my_getnbr(str[1]) <= 0 || my_getnbr(str[1]) > REG_NUMBER)
+  if (is_reg(str) != 1)
     return (0);
   str[i] = str[y] = SEPARATOR_CHAR;
-  return (1);
+  return (fill_instruction(str, &add_sub, list));
 }
 
-int	check_and(char *str)
+int	check_and(char *str, t_list *list, char nme)
 {
-  int	i;
-  int	y;
+  int		i;
+  int		y;
+  t_inst	and;
 
   i = 0;
-  if (str == NULL || my_strlen(str) < 6 ||
+  and.name = nme;
+  if (str == NULL ||
       (str[0] != 'r' && str[0] != DIRECT_CHAR && my_str_isnum(str) != 1))
     return (0);
   while (str[i] != NULL && str[i] != SEPARATOR_CHAR)
@@ -108,5 +113,15 @@ int	check_and(char *str)
   y = str[i] != NULL ? i : 0;
   while (str[i] != NULL && str[i] != SEPARATOR_CHAR)
     i++;
-  if (
+  if (is_reg(&str[i + 1]) != 1)
+    return (0);
+  str[i] = '\0';
+  if (!(is_reg(&str[y + 1]) && is_dir(&str[y + 1]) && is_ind(&str[y + 1]) &&
+	is_label(&str[y + 1])))
+    return (0);
+  str[y] = '\0';
+  if (!(is_reg(str) && is_dir(str) && is_ind(str) && is_label(str)))
+    return (0);
+  str[y] = str[i] = SEPARATOR_CHAR;
+  return (fill_instruction(str, &and, list));
 }

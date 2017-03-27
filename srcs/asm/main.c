@@ -5,29 +5,29 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Mon Mar  6 18:21:54 2017 Kévin Laspougeas
-** Last update Mon Mar 27 22:20:42 2017 Kévin Laspougeas
+** Last update Tue Mar 28 00:28:23 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
 
-int	check_args(char *str, int l, const int fd_out)
+int	check_args(char *str, t_list *list)
 {
-  return (my_strncmp(str, "live ", 5) == 0 ? check_live(&str[5], fd_out) :
-	  my_strncmp(str, "ld ", 3) == 0 ? check_ld(&str[3], fd_out) :
-	  my_strncmp(str, "st ", 3) == 0 ? check_st(&str[3], fd_out) :
-	  my_strncmp(str, "add ", 4) == 0 ? check_add_sub(&str[4], fd_out) :
-	  my_strncmp(str, "sub ", 4) == 0 ? check_add_sub(&str[4], fd_out) :
-	  my_strncmp(str, "and ", 4) == 0 ? check_and(&str[4], fd_out) :
-	  my_strncmp(str, "or ", 3) == 0 ? check_or(&str[3], fd_out) :
-	  my_strncmp(str, "xor ", 4) == 0 ? check_xor(&str[4], fd_out) :
-	  my_strncmp(str, "zjmp ", 5) == 0 ? check_zjmp(&str[5], fd_out) :
-	  my_strncmp(str, "ldi ", 4) == 0 ? check_ldi(&str[4], fd_out) :
-	  my_strncmp(str, "sti ", 4) == 0 ? check_sti(&str[4], fd_out) :
-	  my_strncmp(str, "fork ", 5) == 0 ? check_fork(&str[5], fd_out) :
-	  my_strncmp(str, "lld ", 4) == 0 ? check_lld(&str[4], fd_out) :
-	  my_strncmp(str, "lldi ", 5) == 0 ? check_lldi(&str[5], fd_out) :
-	  my_strncmp(str, "lfork ", 6) == 0 ? check_lfork(&str[6], fd_out) :
-	  my_strncmp(str, "aff ", 4) == 0 ? check_aff(&str[4], fd_out) : 0):
+  return (my_strncmp(str, "live ", 5) == 0 ? check_live(&str[5], list) :
+	  my_strncmp(str, "ld ", 3) == 0 ? check_ld(&str[3], list, 2) :
+	  my_strncmp(str, "st ", 3) == 0 ? check_st(&str[3], list) :
+	  my_strncmp(str, "add ", 4) == 0 ? check_add_sub(&str[4], list, 4) :
+	  my_strncmp(str, "sub ", 4) == 0 ? check_add_sub(&str[4], list, 5) :
+	  my_strncmp(str, "and ", 4) == 0 ? check_and(&str[4], list, 6) :
+	  my_strncmp(str, "or ", 3) == 0 ? check_and(&str[3], list, 7) :
+	  my_strncmp(str, "xor ", 4) == 0 ? check_and(&str[4], list, 8) :
+	  my_strncmp(str, "zjmp ", 5) == 0 ? check_zjmp(&str[5], list) :
+	  my_strncmp(str, "ldi ", 4) == 0 ? check_ldi(&str[4], list, 10) :
+	  my_strncmp(str, "sti ", 4) == 0 ? check_sti(&str[4], list) :
+	  my_strncmp(str, "fork ", 5) == 0 ? check_fork(&str[5], list, 12) :
+	  my_strncmp(str, "lld ", 4) == 0 ? check_ld(&str[4], list, 13) :
+	  my_strncmp(str, "lldi ", 5) == 0 ? check_ldi(&str[5], list, 14) :
+	  my_strncmp(str, "lfork ", 6) == 0 ? check_fork(&str[6], list, 15) :
+	  my_strncmp(str, "aff ", 4) == 0 ? check_aff(&str[4], list) : 0):
 }
 
 void	check_mnemo(char *str, int l)
@@ -43,7 +43,7 @@ void	check_mnemo(char *str, int l)
     exit_error(str, l, WRG_MNEMO);
 }
 
-void	check_code(const int fd, const int fd_out)
+void	check_code(const int fd, const int fd_out, t_list *list)
 {
   char	*line;
   int	lines;
@@ -58,7 +58,7 @@ void	check_code(const int fd, const int fd_out)
 	  line[my_strlen(line) - 1] != LABEL_CHAR)
 	{
 	  check_mnemo(line, lines);
-	  if (check_args(line, lines, fd_out) != 1)
+	  if (check_args(line, list) != 1)
 	    exit_error(line, lines, WRG_PAR);
 	}
       lines++;
@@ -77,6 +77,7 @@ int	main(int ac, char **av)
 {
   int		fd;
   int		fd_out;
+  t_list	list;
 
   if (ac == 1 || (ac == 2 && my_strcmp(av[1], "-h") == 0))
     usage(av[0]);
@@ -84,8 +85,8 @@ int	main(int ac, char **av)
     {
       if ((fd_out = open("./out.cor", O_CREAT | O_RDWR | O_TRUNC, 0666)) <= 0)
 	return (84);
-      make_header(fd, fd_out);
-      check_code(fd, fd_out);
+      list = make_list();
+      check_code(fd, fd_out, &list);
       //      interpret(fd);
       close(fd);
       close(fd_out);
