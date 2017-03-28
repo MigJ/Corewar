@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Tue Oct 11 11:08:31 2016 Kévin Laspougeas
-** Last update Tue Mar 28 02:16:06 2017 Kévin Laspougeas
+** Last update Tue Mar 28 03:51:36 2017 Kévin Laspougeas
 */
 
 #include "my.h"
@@ -33,7 +33,6 @@ int	my_str_isnum(char *str)
 /* int	my_str_isnum(char *str) */
 /* { */
 /*   int	i; */
-
 /*   i = 0; */
 /*   if (str) */
 /*     { */

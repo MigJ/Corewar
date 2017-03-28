@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Mon Mar  6 18:21:54 2017 Kévin Laspougeas
-** Last update Tue Mar 28 01:01:42 2017 Kévin Laspougeas
+** Last update Tue Mar 28 04:09:33 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -22,12 +22,12 @@ int	check_args(char *str, t_list *list)
 	  my_strncmp(str, "xor ", 4) == 0 ? check_and(&str[4], list, 8) :
 	  my_strncmp(str, "zjmp ", 5) == 0 ? check_zjmp(&str[5], list) :
 	  my_strncmp(str, "ldi ", 4) == 0 ? check_ldi(&str[4], list, 10) :
-	  my_strncmp(str, "sti ", 4) == 0 ? check_sti(&str[4], list) :
+	  my_strncmp(str, "sti ", 4) == 0 ? check_sti(&str[4], list, 11) :
 	  my_strncmp(str, "fork ", 5) == 0 ? check_fork(&str[5], list, 12) :
 	  my_strncmp(str, "lld ", 4) == 0 ? check_ld(&str[4], list, 13) :
 	  my_strncmp(str, "lldi ", 5) == 0 ? check_ldi(&str[5], list, 14) :
 	  my_strncmp(str, "lfork ", 6) == 0 ? check_fork(&str[6], list, 15) :
-	  my_strncmp(str, "aff ", 4) == 0 ? check_aff(&str[4], list) : 0):
+	  my_strncmp(str, "aff ", 4) == 0 ? check_aff(&str[4], list) : 0);
 }
 
 void	check_mnemo(char *str, int l)

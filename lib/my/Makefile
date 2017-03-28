@@ -5,7 +5,7 @@
 ## Login   <laspou_k@epitech.net>
 ## 
 ## Started on  Fri Oct 14 12:27:39 2016 Kévin Laspougeas
-## Last update Tue Jan 10 17:10:41 2017 Kévin Laspougeas
+## Last update Tue Mar 28 03:20:07 2017 Kévin Laspougeas
 ##
 
 CC	=	gcc
@@ -66,6 +66,7 @@ SRCS	=	my_find_prime_sup.c \
 		my_putnbr_blong.c \
 		my_puterror.c	\
 		my_strndup.c	\
+		my_strsep.c	\
 
 OBJS	=	$(SRCS:.c=.o)
 

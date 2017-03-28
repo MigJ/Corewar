@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar 27 16:59:52 2017 Kévin Laspougeas
-** Last update Tue Mar 28 01:10:16 2017 Kévin Laspougeas
+** Last update Tue Mar 28 17:47:36 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -15,7 +15,7 @@ t_list	make_list()
   t_list	list;
 
   list.first = NULL;
-  list.end = NULL;
+  list.last = NULL;
   list.size = 0;
   return (list);
 }
@@ -58,4 +58,20 @@ void	add_to_list(t_list *list, t_inst *to_add)
       list->last->next = to_add;
       list->last = to_add;
     }
+}
+
+int	find_label(t_list *list, char *name)
+{
+  t_inst	*tmp;
+  int		f;
+
+  if (list->first != NULL)
+    {
+      tmp = list->first;
+      while (tmp != NULL && (f = my_strcmp(name, tmp->name)) != 0)
+	tmp = tmp->next;
+      if (f == 0)
+	return (tmp->addr);
+    }
+  return (exit_stage_2(name, list, WRG_LABEL));
 }

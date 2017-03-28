@@ -5,7 +5,7 @@
 ## Login   <laspou_k@epitech.net>
 ## 
 ## Started on  Mon Mar  6 18:36:18 2017 Kévin Laspougeas
-## Last update Tue Mar 14 16:40:14 2017 Kévin Laspougeas
+## Last update Tue Mar 28 17:42:02 2017 Kévin Laspougeas
 ##
 
 CC		=	gcc
@@ -20,7 +20,14 @@ ASM		=	./asm/asm
 CORW		=	./corewar/corewar
 
 SRCS_ASM	=	./srcs/asm/main.c		\
-			./srcs/asm/get_next_line.c
+			./srcs/asm/get_next_line.c	\
+			./srcs/asm/checks_1.c		\
+			./srcs/asm/checks_2.c		\
+			./srcs/asm/check_args.c		\
+			./srcs/asm/get_size.c		\
+			./srcs/asm/errors.c		\
+			./srcs/asm/get_labels.c		\
+			./srcs/asm/free.c		\
 
 SRCS_CORW	=
 

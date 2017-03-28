@@ -5,15 +5,15 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar 27 23:54:16 2017 Kévin Laspougeas
-** Last update Tue Mar 28 01:36:11 2017 Kévin Laspougeas
+** Last update Tue Mar 28 04:14:43 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
 
-int	is_reg(const char *str);
-int	is_dir(const char *str);
-int	is_ind(const char *str);
-int	is_label(const char *str);
+int	is_reg(char *str);
+int	is_dir(char *str);
+int	is_ind(char *str);
+int	is_label(char *str);
 
 int	check_zjmp(char *str, t_list *list)
 {
