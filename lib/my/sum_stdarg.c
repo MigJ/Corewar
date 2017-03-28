@@ -5,11 +5,11 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Nov  7 13:42:59 2016 Kévin Laspougeas
-** Last update Mon Nov  7 14:10:00 2016 Kévin Laspougeas
+** Last update Tue Mar 28 01:35:38 2017 Kévin Laspougeas
 */
 
-#include "my.h"
 #include <stdarg.h>
+#include "my.h"
 
 int	sum_stdarg(int i, int nb, ...)
 {

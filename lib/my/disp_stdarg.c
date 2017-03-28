@@ -5,11 +5,11 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Mon Nov  7 14:14:05 2016 Kévin Laspougeas
-** Last update Mon Nov  7 14:42:01 2016 Kévin Laspougeas
+** Last update Tue Mar 28 01:34:47 2017 Kévin Laspougeas
 */
 
-#include "my.h"
 #include <stdarg.h>
+#include "my.h"
 
 int	disp_stdarg(char *s, ...)
 {

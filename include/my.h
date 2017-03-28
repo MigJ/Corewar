@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Thu Nov  3 14:23:55 2016 Kévin Laspougeas
-** Last update Tue Jan 10 18:14:39 2017 Kévin Laspougeas
+** Last update Tue Mar 28 01:35:04 2017 Kévin Laspougeas
 */
 
 #ifndef MY_H_
@@ -28,7 +28,7 @@ int	my_square_root(int);
 int	my_is_prime(int);
 int	my_find_prime_sup(int);
 char	*my_strcpy(char*, char*);
-char	*my_strncpy(char*,char*, int);
+char	*my_strncpy(char*, char*, int);
 char	*my_revstr(char*);
 char	*my_strstr(char*, char*);
 int	my_strcmp(char*, char*);

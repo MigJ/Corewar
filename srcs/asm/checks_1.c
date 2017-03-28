@@ -1,11 +1,11 @@
 /*
 ** checks_1.c for corewar in /home/laspou_k/delivery/CPE/CPE_Corewar
-** 
+**
 ** Made by Kévin Laspougeas
 ** Login   <laspou_k@epitech.net>
-** 
+**
 ** Started on  Fri Mar 24 14:54:14 2017 Kévin Laspougeas
-** Last update Tue Mar 28 01:06:45 2017 Kévin Laspougeas
+** Last update Tue Mar 28 01:35:56 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -34,7 +34,7 @@ int	check_ld(char *str, t_list *list, char nme)
 {
   int		i;
   t_inst	ld;
-  
+
   i = 0;
   ld.name = my_strdup(&nme);
   if (str == NULL)

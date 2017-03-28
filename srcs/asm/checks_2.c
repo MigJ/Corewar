@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar 27 23:54:16 2017 Kévin Laspougeas
-** Last update Tue Mar 28 01:07:53 2017 Kévin Laspougeas
+** Last update Tue Mar 28 01:36:11 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -21,7 +21,7 @@ int	check_zjmp(char *str, t_list *list)
   char		c;
 
   c = 9;
-  zjmp.name = my_strdup(&c);;
+  zjmp.name = my_strdup(&c);
   if (str == NULL || is_dir(str) != 1)
     return (0);
   return (fill_instruction(str, &zjmp, list));

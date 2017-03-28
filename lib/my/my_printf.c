@@ -5,12 +5,12 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Mon Nov  7 15:15:23 2016 Kévin Laspougeas
-** Last update Thu Dec  8 16:23:37 2016 Kévin Laspougeas
+** Last update Tue Mar 28 01:35:16 2017 Kévin Laspougeas
 */
 
-#include "my.h"
 #include <stdarg.h>
 #include <stdint.h>
+#include "my.h"
 
 int	is_num(char c)
 {
