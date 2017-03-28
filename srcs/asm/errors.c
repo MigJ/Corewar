@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Tue Mar 28 01:26:09 2017 Kévin Laspougeas
-** Last update Tue Mar 28 17:50:14 2017 Kévin Laspougeas
+** Last update Tue Mar 28 18:24:10 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -24,10 +24,31 @@ void	exit_error(char *str, int line, int cas)
 int	exit_stage_2(char *name, t_list *list, int cas)
 {
   write(2, name, my_strlen(name));
-  write(2, cas == WRG_LABEL ? " :: Label not found !" : "?",
-	cas == WRG_LABEL ? 21, 1);
+  write(2, cas == WRG_LABEL ? " :: Label not found !" : cas == WRG_LCHARS ?
+	" :: unauthorized label chars !" : "?",	cas == WRG_LABEL ? 21 :
+	cas == WRG_LCHARS ? 30 : 1, 1);
   write(2, "\n", 1);
   free_list(list);
   exit(84);
   return (0);
+}
+
+int	is_label_chars(char *str, const char *l_chars)
+{
+  int	i;
+  int	j;
+
+  i = 0;
+  while (str != NULL && str[i] != '\0')
+    {
+      j = 0;
+      while (l_chars[j] != '\0')
+	{
+	  if (str[i] != l_chars[j])
+	    return (0);
+	  j++;
+	}
+      i++;
+    }
+  return (str != NULL ? 1 : 0);
 }

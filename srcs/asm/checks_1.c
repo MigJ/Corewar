@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Fri Mar 24 14:54:14 2017 Kévin Laspougeas
-** Last update Tue Mar 28 04:14:31 2017 Kévin Laspougeas
+** Last update Tue Mar 28 18:26:08 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -68,8 +68,7 @@ int	check_st(char *str, t_list *list)
   if (is_reg(str) != 1)
     return (0);
   str[i] = SEPARATOR_CHAR;
-  fill_instruction(str, &st, list);
-  return (1);
+  return (fill_instruction(str, &st, list));
 }
 
 int	check_add_sub(char *str, t_list *list, char nme)

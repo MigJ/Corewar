@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar 27 16:59:52 2017 Kévin Laspougeas
-** Last update Tue Mar 28 17:47:36 2017 Kévin Laspougeas
+** Last update Tue Mar 28 18:18:55 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -20,13 +20,20 @@ t_list	make_list()
   return (list);
 }
 
-int	line_is_label(const char *str)
+int	line_is_label(char *str, t_list *list)
 {
   int	i;
 
   i = 0;
   while (str[i] != '\0' && str[i] != LABEL_CHAR)
     i++;
+  if (str[i] == LABEL_CHAR)
+    {
+      str[i] = '\0';
+      if (is_label_chars(str, LABEL_CHARS) != 1)
+	return (exit_stage_2(str, list, WRG_LCHARS));
+      str[i] = LABEL_CHAR;
+    }
   return (str[i] == '\0' ? 0 : i);
 }
 

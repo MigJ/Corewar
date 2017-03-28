@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Mon Mar  6 18:21:54 2017 Kévin Laspougeas
-** Last update Tue Mar 28 04:09:33 2017 Kévin Laspougeas
+** Last update Tue Mar 28 18:19:33 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -52,7 +52,7 @@ void	check_code(const int fd, const int fd_out, t_list *list)
   lines = 1;
   while ((line = get_next_line(fd)) != NULL)
     {
-      if ((r = line_is_label(line)) >= 1)
+      if ((r = line_is_label(line, list)) >= 1)
 	{
 	  add_label(line, list, lines);
 	  line = &line[r + 1];
