@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar  6 18:25:42 2017 Kévin Laspougeas
-** Last update Tue Mar 28 18:20:36 2017 Kévin Laspougeas
+** Last update Wed Mar 29 14:10:11 2017 Kévin Laspougeas
 */
 
 #ifndef		__ASM_H__
@@ -71,7 +71,8 @@ int		find_label(t_list *list, char *name);
 **		OUTPUT TO FILE
 */
 
-
+void		write_inst(t_inst *inst, const int fd_out);
+void		write_it_all(t_list *list, const int fd_out);
 
 /*
 **		FREES
