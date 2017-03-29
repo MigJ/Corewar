@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar 27 23:22:10 2017 Kévin Laspougeas
-** Last update Tue Mar 28 04:13:20 2017 Kévin Laspougeas
+** Last update Wed Mar 29 13:48:34 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -19,14 +19,14 @@ int	is_reg(char *str)
   return (1);
 }
 
-int	is_dir(char *str)
+int	is_ind(char *str)
 {
   if (str == NULL || my_str_isnum(str) != 1)
     return (0);
   return (1);
 }
 
-int	is_ind(char *str)
+int	is_dir(char *str)
 {
   if (str == NULL || str[0] != DIRECT_CHAR || my_str_isnum(&str[1]) != 1)
     return (0);
