@@ -5,7 +5,7 @@
 ## Login   <laspou_k@epitech.net>
 ## 
 ## Started on  Mon Mar  6 18:36:18 2017 Kévin Laspougeas
-## Last update Tue Mar 28 17:42:02 2017 Kévin Laspougeas
+## Last update Wed Mar 29 14:12:19 2017 Kévin Laspougeas
 ##
 
 CC		=	gcc
@@ -28,6 +28,7 @@ SRCS_ASM	=	./srcs/asm/main.c		\
 			./srcs/asm/errors.c		\
 			./srcs/asm/get_labels.c		\
 			./srcs/asm/free.c		\
+			./srcs/asm/writes.c		\
 
 SRCS_CORW	=
 
