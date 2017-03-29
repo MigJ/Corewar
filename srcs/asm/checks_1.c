@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Fri Mar 24 14:54:14 2017 Kévin Laspougeas
-** Last update Tue Mar 28 18:26:08 2017 Kévin Laspougeas
+** Last update Wed Mar 29 23:55:29 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -24,7 +24,6 @@ int	check_live(char *str, t_list *list)
   live.name = my_strdup(&c);
   if (is_ind(str) != 1 || (my_getnbr(&str[1]) <= 0 || my_getnbr(&str[1]) > 4))
     return (0);
-  live.addr = list->size - (T_IND + 1);
   return (fill_instruction(str, &live, list));
 }
 
@@ -57,7 +56,8 @@ int	check_st(char *str, t_list *list)
 
   i = 0;
   c = 3;
-  st.name = my_strdup(&c);
+  st.name = my_memset(2);
+  st.name = &c;
   if (str == NULL || my_strlen(str) < 4 || str[0] != 'r')
     return (0);
   while (str[i] != '\0' && str[i] != SEPARATOR_CHAR)

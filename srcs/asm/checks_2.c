@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar 27 23:54:16 2017 Kévin Laspougeas
-** Last update Tue Mar 28 04:14:43 2017 Kévin Laspougeas
+** Last update Thu Mar 30 00:41:44 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -55,29 +55,31 @@ int	check_sti(char *str, t_list *list, char nme)
 {
   int		i;
   int		y;
-  t_inst	sti;
+  t_inst	*sti;
 
-  i = 0;
-  sti.name = my_strdup(&nme);
+  i = y = 0;
+  sti = malloc(sizeof(*sti));
+  sti->name = my_memset(45);
+  sti->name[0] = nme;
   if (str == NULL)
     return (0);
   while (str[i] != '\0' && str[i] != SEPARATOR_CHAR)
     i++;
-  y = str[i] != '\0' ? 1 : 0;
+  y = i++;
   while (str[i] != '\0' && str[i] != SEPARATOR_CHAR)
     i++;
+  str[i] = '\0';
+  if (is_reg(&str[y + 1]) != 1 && is_dir(&str[y + 1]) != 1 &&
+      is_ind(&str[y + 1]) != 1 && is_label(&str[y + 1]) != 1)
+    return (0);
+  str[y] = '\0';
   if (is_reg(&str[i + 1]) != 1 && is_dir(&str[i + 1]) != 1 &&
       is_ind(&str[i + 1]) != 1)
     return (0);
-  str[i] = '\0';
-  if (is_reg(&str[y + 1]) != 1 && is_dir(&str[y + 1]) != 1 &&
-      is_ind(&str[y + 1]) != 1)
-    return (0);
-  str[y] = '\0';
   if (is_reg(str) != 1)
     return (0);
   str[y] = str[i] = SEPARATOR_CHAR;
-  return (fill_instruction(str, &sti, list));
+  return (fill_instruction(str, sti, list));
 }
 
 int	check_fork(char *str, t_list *list, char nme)

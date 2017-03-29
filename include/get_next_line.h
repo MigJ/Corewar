@@ -5,14 +5,14 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Tue Jan  3 21:41:03 2017 Kévin Laspougeas
-** Last update Tue Jan 10 21:06:14 2017 Kévin Laspougeas
+** Last update Wed Mar 29 23:49:14 2017 Kévin Laspougeas
 */
 
 #ifndef		__GET_NEXT_LINE_H__
 # define	__GET_NEXT_LINE_H__
 
 #ifndef		READ_SIZE
-# define	READ_SIZE (4096)
+# define	READ_SIZE (10)
 #endif		/* !READ_SIZE */
 
 #include	<unistd.h>

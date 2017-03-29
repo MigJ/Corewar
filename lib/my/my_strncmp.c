@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Tue Oct 11 10:36:58 2016 Kévin Laspougeas
-** Last update Tue Jan 10 18:27:03 2017 Kévin Laspougeas
+** Last update Wed Mar 29 23:16:45 2017 Kévin Laspougeas
 */
 
 int	my_strncmp(char *s1, char *s2, int n)

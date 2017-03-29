@@ -5,13 +5,14 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar  6 18:25:42 2017 Kévin Laspougeas
-** Last update Wed Mar 29 14:10:11 2017 Kévin Laspougeas
+** Last update Thu Mar 30 01:06:48 2017 Kévin Laspougeas
 */
 
 #ifndef		__ASM_H__
 # define	__ASM_H__
 
 # include <fcntl.h>
+# include <string.h>
 # include "my.h"
 # include "get_next_line.h"
 # include "op.h"
@@ -19,9 +20,9 @@
 typedef struct	s_instruct
 {
   char			*name;
-  int			addr;
   unsigned char		c_byte;
-  unsigned char		**args;
+  int			size;
+  char			*args;
   struct s_instruct	*next;
   struct s_instruct	*prev;
 }t_inst;
@@ -40,6 +41,7 @@ typedef struct	s_list
 # define	WRG_MNEMO	1
 # define	WRG_PAR		2
 # define	WRG_LABEL	3
+# define	WRG_LCHARS	4
 
 int    		check_live(char *str, t_list *list);
 int		check_ld(char *str, t_list *list, char nme);
@@ -63,14 +65,32 @@ void		get_size(char *str, t_inst *inst, t_list *list);
 **		CHAINED LISTS
 */
 
-t_list		make_list();
+t_list		*make_list();
 void		add_to_list(t_list *list, t_inst *to_add);
 int		find_label(t_list *list, char *name);
+char		**my_str_sep(char*, char);
+char		*my_memset(int);
+
+
+/*
+**		COMPILATION
+*/
+
+char		*ret_content(char *line);
+int		ret_params_size(char *line);
+unsigned char	convert_bin_to_dec(int nb);
+int		ret_oct_from_line(char *line);
+int		is_dir(char *line);
+int		is_reg(char *line);
+int		is_ind(char *line);
+char		*my_memset(int);
+char		**my_strsep(char *str, char sep);
 
 /*
 **		OUTPUT TO FILE
 */
 
+void		create_header(const int fd, const int fd_out, header_t *head);
 void		write_inst(t_inst *inst, const int fd_out);
 void		write_it_all(t_list *list, const int fd_out);
 

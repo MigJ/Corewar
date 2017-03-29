@@ -5,10 +5,11 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Mon Mar  6 18:21:54 2017 Kévin Laspougeas
-** Last update Wed Mar 29 13:53:26 2017 Kévin Laspougeas
+** Last update Thu Mar 30 01:04:29 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
+#include <stdio.h>
 
 int	check_args(char *str, t_list *list)
 {
@@ -22,7 +23,7 @@ int	check_args(char *str, t_list *list)
 	  my_strncmp(str, "xor ", 4) == 0 ? check_and(&str[4], list, 8) :
 	  my_strncmp(str, "zjmp ", 5) == 0 ? check_zjmp(&str[5], list) :
 	  my_strncmp(str, "ldi ", 4) == 0 ? check_ldi(&str[4], list, 10) :
-	  my_strncmp(str, "sti ", 4) == 0 ? check_sti(&str[4], list, 11) :
+	  strncmp(str, "sti ", 4) == 0 ? check_sti(&str[4], list, 11) :
 	  my_strncmp(str, "fork ", 5) == 0 ? check_fork(&str[5], list, 12) :
 	  my_strncmp(str, "lld ", 4) == 0 ? check_ld(&str[4], list, 13) :
 	  my_strncmp(str, "lldi ", 5) == 0 ? check_ldi(&str[5], list, 14) :
@@ -37,7 +38,7 @@ void	check_mnemo(char *str, int l)
       my_strncmp(str, "sub ", 4) != 0 && my_strncmp(str, "and ", 4) != 0 &&
       my_strncmp(str, "or ", 3) != 0 && my_strncmp(str, "xor ", 4) != 0 &&
       my_strncmp(str, "zjmp ", 5) != 0 && my_strncmp(str, "ldi ", 4) != 0 &&
-      my_strncmp(str, "sti ", 4) != 0 && my_strncmp(str, "fork ", 5) != 0 &&
+      strncmp(str, "sti ", 4) != 0 && my_strncmp(str, "fork ", 5) != 0 &&
       my_strncmp(str, "lld ", 4) != 0 && my_strncmp(str, "lldi ", 5) != 0 &&
       my_strncmp(str, "lfork ", 6) != 0 && my_strncmp(str, "aff ", 4) != 0)
     exit_error(str, l, WRG_MNEMO);
@@ -52,21 +53,21 @@ void	check_code(const int fd, const int fd_out, t_list *list)
   lines = 1;
   while ((line = get_next_line(fd)) != NULL)
     {
-      if ((r = line_is_label(line, list)) >= 1)
-	{
-	  add_label(line, list, lines);
-	  line = &line[r + 1];
-	}
-      if (line[0] != COMMENT_CHAR && my_strncmp(line, NAME_CMD_STRING,
-						my_strlen(NAME_CMD_STRING)) &&
-	  my_strncmp(line, COMMENT_CMD_STRING,
-		     my_strlen(COMMENT_CMD_STRING)) &&
-	  line[my_strlen(line) - 1] != LABEL_CHAR)
+      if (line[0] != COMMENT_CHAR && line[my_strlen(line) - 1] != LABEL_CHAR &&
+	  my_strncmp(line, NAME_CMD_STRING, my_strlen(NAME_CMD_STRING)) != 0 &&
+	  my_strncmp(line, COMMENT_CMD_STRING, my_strlen(NAME_CMD_STRING))!= 0)
 	{
 	  check_mnemo(line, lines);
 	  if (check_args(line, list) != 1)
 	    exit_error(line, lines, WRG_PAR);
 	}
+      puts("A");
+      if ((r = line_is_label(line, list)) >= 1)
+	{
+	  add_label(line, list, lines);
+	  line = &line[r + 1];
+	}
+      puts("B");
       lines++;
     }
 }
@@ -79,11 +80,24 @@ void	usage(char *av)
   my_putstr("\t\t\tfile_name.cor, an executable in the Virtual Machine.\n");
 }
 
+void	show_list(t_list *list)
+{
+  t_inst	*tmp;
+
+  tmp = list->first;
+  while (tmp != NULL)
+    {
+      my_printf("Nom %d\nSize %d\nc_byte %d\n", tmp->name, tmp->size, tmp->c_byte);
+      tmp = tmp->next;
+    }
+}
+
 int	main(int ac, char **av)
 {
   int		fd;
   int		fd_out;
-  t_list	list;
+  t_list	*list;
+  header_t	head;
 
   if (ac == 1 || (ac == 2 && my_strcmp(av[1], "-h") == 0))
     usage(av[0]);
@@ -92,7 +106,9 @@ int	main(int ac, char **av)
       if ((fd_out = open("./out.cor", O_CREAT | O_RDWR | O_TRUNC, 0666)) <= 0)
 	return (84);
       list = make_list();
-      check_code(fd, fd_out, &list);
+      create_header(fd, fd_out, &head);
+      check_code(fd, fd_out, list);
+      show_list(list);
       close(fd);
       close(fd_out);
       return (0);

@@ -28,12 +28,11 @@ int	main(int ac, char **av)
   to_wr.args[3] = NULL;
   fd = open("./test.cor.out", O_CREAT | O_RDWR | O_TRUNC, 0666);
   printf("%d\n", c);
-  write(fd, &c, 1);
-  /* write(fd, &to_wr.name[0], 1); */
-  /* write(fd, &to_wr.c_byte, 1); */
-  /* write(fd, &to_wr.args[0][0], 1); */
-  /* write(fd, to_wr.args[1], 2); */
-  /* write(fd, to_wr.args[2], 2); */
+  write(fd, &to_wr.name[0], 1);
+  write(fd, &to_wr.c_byte, 1);
+  write(fd, &to_wr.args[0][0], 1);
+  write(fd, to_wr.args[1], 2);
+  write(fd, to_wr.args[2], 2);
   //  write(fd, &i, sizeof(int));
   close(fd);
   return (0);

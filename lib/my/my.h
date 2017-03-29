@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Thu Nov  3 14:23:55 2016 Kévin Laspougeas
-** Last update Tue Mar 28 03:19:44 2017 Kévin Laspougeas
+** Last update Wed Mar 29 22:45:01 2017 Kévin Laspougeas
 */
 
 #ifndef MY_H_
@@ -67,6 +67,6 @@ int	my_printf(char*, ...);
 int	my_showstr_oct(char*);
 void	my_show_ptr(uintptr_t);
 void	my_putnbr_blong(long, char*);
-char	**my_strsep(const char *str, const char sep);
+char	**my_strsep(char *str, char sep);
 
 #endif /* MY_H_ */

@@ -5,18 +5,19 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar 27 16:59:52 2017 Kévin Laspougeas
-** Last update Wed Mar 29 13:53:56 2017 Kévin Laspougeas
+** Last update Thu Mar 30 01:11:21 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
 
-t_list	make_list()
+t_list	*make_list()
 {
-  t_list	list;
+  t_list	*list;
 
-  list.first = NULL;
-  list.last = NULL;
-  list.size = 0;
+  list = malloc(sizeof(t_list));
+  list->first = NULL;
+  list->last = NULL;
+  list->size = 0;
   return (list);
 }
 
@@ -42,7 +43,8 @@ void	add_label(char *line, t_list *list, int pos)
   int		i;
   t_inst	label;
 
-  label.addr = pos;
+  i = 0;
+  label.size = list->size;
   while (line[i] != LABEL_CHAR)
     i++;
   label.name = my_strndup(line, i);
@@ -51,7 +53,14 @@ void	add_label(char *line, t_list *list, int pos)
 
 void	add_to_list(t_list *list, t_inst *to_add)
 {
-  if (list->first == NULL)
+  to_add->next = NULL;
+  to_add->prev = list->last;
+  if (list->last)
+    list->last->next = to_add;
+  else
+    list->first = to_add;
+  list->last = to_add;
+  /*if (list->first == NULL)
     {
       list->first = to_add;
       list->last = to_add;
@@ -64,7 +73,7 @@ void	add_to_list(t_list *list, t_inst *to_add)
       to_add->prev = list->last;
       list->last->next = to_add;
       list->last = to_add;
-    }
+      }*/
 }
 
 int	find_label(t_list *list, char *name)
@@ -78,7 +87,7 @@ int	find_label(t_list *list, char *name)
       while (tmp != NULL && (f = my_strcmp(name, tmp->name)) != 0)
 	tmp = tmp->next;
       if (f == 0)
-	return (tmp->addr);
+	return (tmp->size);
     }
   return (exit_stage_2(name, list, WRG_LABEL));
 }

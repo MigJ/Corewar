@@ -1,16 +1,16 @@
 /*
-** my_strsep.c for mylib in /home/laspou_k/delivery/CPE/CPE_2016_corewar
+1** my_strsep.c for mylib in /home/laspou_k/delivery/CPE/CPE_2016_corewar
 ** 
 ** Made by Kévin Laspougeas
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Tue Mar 28 03:08:57 2017 Kévin Laspougeas
-** Last update Tue Mar 28 03:18:28 2017 Kévin Laspougeas
+** Last update Wed Mar 29 23:37:33 2017 Kévin Laspougeas
 */
 
 #include "my.h"
 
-char	**my_strsep(const char *str, const char sep)
+char	**my_strsep(char *str, char sep)
 {
   char	**ret;
   int	x;

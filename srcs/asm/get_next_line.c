@@ -1,87 +1,75 @@
 /*
-** get_next_line.c for gnl in /home/laspou_k/delivery/CPE/CPE_2016_getnextline
-**
-** Made by Kévin Laspougeas
-** Login   <laspou_k@epitech.net>
-**
-** Started on  Tue Jan  3 21:43:06 2017 Kévin Laspougeas
-** Last update Sun Jan 22 18:50:26 2017 Kévin Laspougeas
+** get_next_line.c for get_next_line in /home/detroy_j/Documents/delivery/CPE_2016_getnextline
+** 
+** Made by detroy_j
+** Login   <jean-baptiste.detroyes@epitech.eu@epitech.net>
+** 
+** Started on  Wed Dec 21 15:09:00 2016 detroy_j
+** Last update Wed Mar 29 23:51:07 2017 Kévin Laspougeas
 */
 
-#include "get_next_line.h"
+#include <stdlib.h>
+#include <unistd.h>
+#include "asm.h"
 
-size_t	my_strlen(const char *str)
+static char	*remalloc(char *str, size_t len)
 {
   size_t	i;
+  char	*res;
 
-  if (str)
-    {
-      i = 0;
-      while (str[i] != '\0')
-	i++;
-      return (i);
-    }
-  return (0);
+  i = -1;
+  res = my_memset(len + READ_SIZE + 1);
+  while (++i < len)
+    res[i] = str[i];
+  res[i] = 0;
+  free(str);
+  return (res);
 }
 
-char	*my_strncadup(char *ret, const char *buff, int n)
+static char	my_read(const int fd)
 {
-  char	*new;
-  int	i;
-  int	j;
+  static char	buffer[READ_SIZE + 1];
+  static char	*p;
+  static size_t	bytes_read = 0;
+  char	c;
 
-  i = 0;
-  j = 0;
-  if ((new = malloc(sizeof(char) * (my_strlen(ret) + my_strlen(buff) + 1))) ==
-      NULL)
-    return (NULL);
-  if (ret)
+  if (bytes_read == 0)
     {
-      i = -1;
-      while (ret[++i] != '\0')
-	new[i] = ret[i];
+      if ((bytes_read = read(fd, buffer, READ_SIZE)) < 1)
+	return (-1);
+      p = (char *) &buffer;
+      if (bytes_read == 0)
+	return (0);
     }
-  while (j < n)
-    new[i++] = buff[j++];
-  new[i] = '\0';
-  return (new);
-}
-
-int	find_end(const char *str)
-{
-  int	i;
-
-  i = 0;
-  while (str[i] != '\n' && str[i] != '\0')
-    i++;
-  return (str[i] == '\n' ? i : -1);
+  c = *p;
+  p++;
+  bytes_read--;
+  return (c);
 }
 
 char	*get_next_line(const int fd)
 {
-  static char	*buff;
-  static char	*to_ret;
-  char		*ret;
-  int		n;
+  size_t	i;
+  char	ch;
+  char	*line;
 
-  ret = NULL;
-  if (buff == NULL)
+  if (fd < 0)
+    return (NULL);
+  i = 0;
+  line = my_memset(READ_SIZE + 1);
+  if ((ch = my_read(fd)) == -1)
+    return (NULL);
+  while (ch != '\n' && ch != '\0')
     {
-      if ((buff = malloc(sizeof(char) * READ_SIZE + 1)) == NULL ||
-	  (n = read(fd, buff, READ_SIZE)) <= 0)
-	return (NULL);
-      return (get_next_line(fd));
-    }
-  else if (buff != NULL && (n = find_end(buff)) >= -1)
-    {
-      to_ret = my_strncadup(to_ret, buff, n == -1 ? (int)my_strlen(buff) : n);
-      if (n != -1)
+      line[i++] = ch;
+      ch = my_read(fd);
+      if (ch == -1)
 	{
-	  ret = my_strncadup(ret, to_ret, my_strlen(to_ret));
-	  to_ret = NULL;
+	  (i % (READ_SIZE + 1) == 0) ? line = remalloc(line, i) : 0;
+	  break;
 	}
-      buff = n == -1 ? NULL : &buff[n + 1];
-      return (n == -1 ? get_next_line(fd) : ret);
+      (i % (READ_SIZE + 1) == 0) ? line = remalloc(line, i) : 0;
     }
-  return (NULL);
+  line[i] = '\0';
+  return (line);
 }
