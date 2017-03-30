@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar 27 23:22:10 2017 Kévin Laspougeas
-** Last update Thu Mar 30 00:28:31 2017 Kévin Laspougeas
+** Last update Fri Mar 31 00:33:12 2017 Kévin Laspougeas
 */
 
 #include <string.h>

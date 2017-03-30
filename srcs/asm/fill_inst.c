@@ -5,14 +5,25 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Wed Mar 29 18:16:25 2017 Kévin Laspougeas
-** Last update Thu Mar 30 20:03:12 2017 Kévin Laspougeas
+** Last update Fri Mar 31 01:14:00 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
 
 char	*is_there_a_label(t_inst *inst)
 {
-  
+  int	i;
+  int	j;
+  char	*ret;
+
+  i = j = 0;
+  ret = my_memset(T_LAB + 1);
+  while (i < inst->size && is_in_label_char(inst->args[i], LABEL_CHARS) != 1)
+    i++;
+  while (is_in_label_char(inst->args[i], LABEL_CHARS) == 1)
+    ret[j++] = inst->args[i++];
+  ret[j] = '\0';
+  return (ret[0] == '\0' ? NULL : ret);
 }
 
 void	place_label(t_inst *inst, int offset, t_list *list)
@@ -27,9 +38,14 @@ void	place_label(t_inst *inst, int offset, t_list *list)
   if (inst->args[i] > 16)
     {
       i--;
-      add = int_to_char(inst->args, offset, &i);
-      while (i
-      inst->args = int_to_char(inst->args, offset, &i);
+      add = int_to_char(add, offset, &i);
+      i--;
+      while (++i < inst->size)
+	add[i] = inst->args[i];
+      i = -1;
+      while (++i < inst->size)
+	inst->args[i] = add[i];
+      free(add);
     }
   else
     exit_stage_2(inst->name, list, WRG_LABEL);

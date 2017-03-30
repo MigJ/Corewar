@@ -5,29 +5,21 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Tue Mar 28 03:05:46 2017 Kévin Laspougeas
-** Last update Tue Mar 28 04:14:08 2017 Kévin Laspougeas
+** Last update Thu Mar 30 20:10:21 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
 
-int	is_dir(char *str);
-int	is_ind(char *str);
-int	is_reg(char *str);
-
-void	get_size(char *str, t_inst *inst, t_list *list)
+int	is_in_label_char(char c, char *chars)
 {
-  char	**args;
-  int	x;
+  int	i;
 
-  x = 0;
-  args = my_strsep(str, ',');
-  while (args[x] != NULL)
+  i = 0;
+  while (chars[i] != '\0')
     {
-      list->size += is_ind(args[x]) == 1 && inst->name[0] != 10 &&
-	inst->name[0] != 14 && inst->name[0] != 15 ? 4 : is_reg(args[x]) ? 1 :
-	is_dir(args[x]) ? 2 : is_ind(args[x]) == 1 ? 2 : 44;
-      list->size += inst->name[0] != 1 && inst->name[0] != 9 &&
-	inst->name[0] != 12 && inst->name[0] != 15 ? 2 : 1;
-      x++;
+      if (c == chars[i])
+	return (1);
+      i++;
     }
+  return (0);
 }

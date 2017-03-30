@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Tue Oct 11 10:31:29 2016 Kévin Laspougeas
-** Last update Mon Nov  7 16:05:51 2016 Kévin Laspougeas
+** Last update Fri Mar 31 01:30:55 2017 Kévin Laspougeas
 */
 
 #include "my.h"
@@ -16,7 +16,7 @@ int	my_strcmp(char *s1, char *s2)
   int	p1;
 
   i = 0;
-  while (s1[i] || s2[i])
+  while (s1 && s2 && (s1[i] || s2[i]))
     {
       while (s1[i] == s2[i])
 	{

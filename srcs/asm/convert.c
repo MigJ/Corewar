@@ -5,7 +5,7 @@
 ** Login   <miguel.joubert@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 01:57:24 2017 Joubert Miguel
-** Last update Thu Mar 30 20:22:23 2017 Joubert Miguel
+** Last update Fri Mar 31 01:06:14 2017 Kévin Laspougeas
 */
 
 #include <math.h>
@@ -51,7 +51,7 @@ char			*label_to_char(char *hex, char *args, int *j)
 
   i = -1;
   while (args[++i]) {
-    hex[j] = args[i];
+    hex[*j] = args[i];
     *j += 1;
   }
   return (hex);
