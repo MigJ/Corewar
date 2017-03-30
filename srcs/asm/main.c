@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Mon Mar  6 18:21:54 2017 Kévin Laspougeas
-** Last update Thu Mar 30 18:10:38 2017 Kévin Laspougeas
+** Last update Thu Mar 30 18:38:14 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -95,8 +95,8 @@ int	main(int ac, char **av)
       list = make_list();
       create_header(fd, fd_out, &head);
       check_code(fd, fd_out, list);
+      fill_labels(list);
       write_it_all(list, fd_out);
-      my_printf("%d\n", list->size);
       close(fd);
       close(fd_out);
       return (0);

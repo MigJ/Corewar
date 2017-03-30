@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar  6 18:25:42 2017 Kévin Laspougeas
-** Last update Thu Mar 30 01:06:48 2017 Kévin Laspougeas
+** Last update Thu Mar 30 19:37:58 2017 Kévin Laspougeas
 */
 
 #ifndef		__ASM_H__
@@ -85,6 +85,8 @@ int		is_reg(char *line);
 int		is_ind(char *line);
 char		*my_memset(int);
 char		**my_strsep(char *str, char sep);
+void		fill_labels(t_list *list);
+char		*int_to_char(char *hex, int nb, int *j);
 
 /*
 **		OUTPUT TO FILE

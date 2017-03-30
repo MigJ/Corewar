@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar 27 16:59:52 2017 Kévin Laspougeas
-** Last update Thu Mar 30 18:06:36 2017 Kévin Laspougeas
+** Last update Thu Mar 30 18:22:38 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -72,7 +72,7 @@ void	add_to_list(t_list *list, t_inst *to_add)
       list->last->next = to_add;
       list->last = to_add;
       }
-  if (to_add->name[0] <= 1)
+  if (to_add->name[0] <= 16)
     list->size += to_add->size;
 }
 

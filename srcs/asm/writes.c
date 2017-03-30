@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Wed Mar 29 13:59:47 2017 Kévin Laspougeas
-** Last update Thu Mar 30 16:48:56 2017 Kévin Laspougeas
+** Last update Thu Mar 30 18:37:24 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -18,6 +18,14 @@ void	write_inst(t_inst *inst, const int fd_out)
   write(fd_out, inst->args, inst->size);
 }
 
+void	write_size_head(const int fd_out, t_list *list)
+{
+  lseek(fd_out, PROG_NAME_LENGTH + 8, SEEK_SET);
+  list->size = ((list->size >> 24) & 0xff) | ((list->size << 8) & 0xff0000) |
+    ((list->size >> 8) & 0xff00) | ((list->size << 24) & 0xff000000);
+  write(fd_out, &list->size, sizeof(int));
+}
+
 void	write_it_all(t_list *list, const int fd_out)
 {
   t_inst	*tmp;
@@ -25,8 +33,9 @@ void	write_it_all(t_list *list, const int fd_out)
   tmp = list->first;
   while (tmp != NULL)
     {
-      if (tmp->name[0] < 16)
+      if (tmp->name[0] <= 16)
 	write_inst(tmp, fd_out);
       tmp = tmp->next;
     }
+  write_size_head(fd_out, list);
 }

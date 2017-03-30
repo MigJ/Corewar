@@ -5,10 +5,73 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Wed Mar 29 18:16:25 2017 Kévin Laspougeas
-** Last update Thu Mar 30 01:15:10 2017 Kévin Laspougeas
+** Last update Thu Mar 30 20:03:12 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
+
+char	*is_there_a_label(t_inst *inst)
+{
+  
+}
+
+void	place_label(t_inst *inst, int offset, t_list *list)
+{
+  int	i;
+  char	*add;
+  
+  i = -1;
+  add = my_memset(inst->size);
+  while (++i < inst->size && inst->args[i] <= 16)
+    add[i] = inst->args[i];
+  if (inst->args[i] > 16)
+    {
+      i--;
+      add = int_to_char(inst->args, offset, &i);
+      while (i
+      inst->args = int_to_char(inst->args, offset, &i);
+    }
+  else
+    exit_stage_2(inst->name, list, WRG_LABEL);
+}
+
+void	run_label(t_inst *tmp, t_inst *tmp2, char *to_find, t_list *list)
+{
+  int	diff;
+
+  diff = 0;
+  while (tmp2 != NULL && my_strcmp(to_find, tmp2->name) != 0)
+    {
+      diff += tmp2->size;
+      tmp2 = tmp2->next;
+    }
+  if (tmp != NULL)
+    place_label(tmp, diff - tmp->size, list);
+  else
+    exit_stage_2(to_find, list, WRG_LABEL);
+}
+
+void	fill_labels(t_list *list)
+{
+  t_inst	*tmp;
+  t_inst	*tmp2;
+  char		*to_find;
+
+  tmp = list->first;
+  if (tmp != NULL)
+    {
+      while (tmp != NULL)
+	{
+	  if ((to_find = is_there_a_label(tmp)) != NULL)
+	    {
+	      tmp2 = list->first;
+	      run_label(tmp, tmp2, to_find, list);
+	      free(to_find);
+	    }
+	  tmp = tmp->next;
+	}
+    }
+}
 
 int	fill_instruction(char *line, t_inst *toadd, t_list *list)
 {
