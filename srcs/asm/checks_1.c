@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Fri Mar 24 14:54:14 2017 Kévin Laspougeas
-** Last update Thu Mar 30 02:15:10 2017 Kévin Laspougeas
+** Last update Thu Mar 30 18:03:13 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -31,10 +31,11 @@ int	check_live(char *str, t_list *list)
 int	check_ld(char *str, t_list *list, char nme)
 {
   int		i;
-  t_inst	ld;
+  t_inst	*ld;
 
   i = 0;
-  ld.name = my_strdup(&nme);
+  ld = malloc(sizeof(t_inst));
+  ld->name = my_strdup(&nme);
   if (str == NULL)
     return (0);
   while (str[i] != '\0' && str[i] != SEPARATOR_CHAR)
@@ -46,19 +47,17 @@ int	check_ld(char *str, t_list *list, char nme)
       is_label(str) != 1)
     return (0);
   str[i] = SEPARATOR_CHAR;
-  return (fill_instruction(str, &ld, list));
+  return (fill_instruction(str, ld, list));
 }
 
 int	check_st(char *str, t_list *list)
 {
   int		i;
-  char		c;
-  t_inst	st;
+  t_inst	*st;
 
   i = 0;
-  c = 3;
-  st.name = my_memset(2);
-  st.name = &c;
+  st = malloc(sizeof(t_inst));
+  st->name = my_strdup((char*)3);
   if (str == NULL || my_strlen(str) < 4 || str[0] != 'r')
     return (0);
   while (str[i] != '\0' && str[i] != SEPARATOR_CHAR)
@@ -69,17 +68,18 @@ int	check_st(char *str, t_list *list)
   if (is_reg(str) != 1)
     return (0);
   str[i] = SEPARATOR_CHAR;
-  return (fill_instruction(str, &st, list));
+  return (fill_instruction(str, st, list));
 }
 
 int	check_add_sub(char *str, t_list *list, char nme)
 {
   int		i;
   int		y;
-  t_inst	add_sub;
+  t_inst	*add_sub;
 
   i = 0;
-  add_sub.name = my_strdup(&nme);
+  add_sub = malloc(sizeof(t_inst));
+  add_sub->name = my_strdup(&nme);
   if (str == NULL || my_strlen(str) < 8 || str[0] != 'r')
     return (0);
   while (str[i] != '\0' && str[i] != SEPARATOR_CHAR)
@@ -96,7 +96,7 @@ int	check_add_sub(char *str, t_list *list, char nme)
   if (is_reg(str) != 1)
     return (0);
   str[i] = str[y] = SEPARATOR_CHAR;
-  return (fill_instruction(str, &add_sub, list));
+  return (fill_instruction(str, add_sub, list));
 }
 
 int	check_and(char *str, t_list *list, char nme)

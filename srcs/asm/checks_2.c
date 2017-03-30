@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar 27 23:54:16 2017 Kévin Laspougeas
-** Last update Thu Mar 30 16:47:27 2017 Kévin Laspougeas
+** Last update Thu Mar 30 18:04:35 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -32,10 +32,11 @@ int	check_ldi(char *str, t_list *list, char nme)
 {
   int		i;
   int		y;
-  t_inst	ldi;
+  t_inst	*ldi;
 
   i = 0;
-  ldi.name = my_strdup(&nme);
+  ldi = malloc(sizeof(t_inst));
+  ldi->name = my_strdup(&nme);
   if (str == NULL)
     return (0);
   while (str[i] != '\0' && str[i] != SEPARATOR_CHAR)
@@ -49,7 +50,7 @@ int	check_ldi(char *str, t_list *list, char nme)
   if (is_dir(&str[y + 1]) != 1 && is_ind(&str[y + 1]) != 1)
     return (0);
   str[i] = str[y] = SEPARATOR_CHAR;
-  return (fill_instruction(str, &ldi, list));
+  return (fill_instruction(str, ldi, list));
 }
 
 int	check_sti(char *str, t_list *list, char nme)
@@ -85,22 +86,22 @@ int	check_sti(char *str, t_list *list, char nme)
 
 int	check_fork(char *str, t_list *list, char nme)
 {
-  t_inst	fork;
+  t_inst	*fork;
 
-  fork.name = my_strdup(&nme);
+  fork = malloc(sizeof(t_inst));
+  fork->name = my_strdup(&nme);
   if (is_dir(str) != 1)
     return (0);
-  return (fill_instruction(str, &fork, list));
+  return (fill_instruction(str, fork, list));
 }
 
 int	check_aff(char *str, t_list *list)
 {
-  t_inst	aff;
-  char		c;
+  t_inst	*aff;
 
-  c = 16;
-  aff.name = my_strdup(&c);
+  aff = malloc(sizeof(t_inst));
+  aff->name = my_strdup((char*)16);
   if (is_reg(str) != 1)
     return (0);
-  return (fill_instruction(str, &aff, list));
+  return (fill_instruction(str, aff, list));
 }
