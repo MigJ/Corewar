@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Wed Mar 29 13:59:47 2017 Kévin Laspougeas
-** Last update Wed Mar 29 21:56:11 2017 Kévin Laspougeas
+** Last update Thu Mar 30 16:48:56 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -25,8 +25,8 @@ void	write_it_all(t_list *list, const int fd_out)
   tmp = list->first;
   while (tmp != NULL)
     {
-      write_inst(tmp, fd_out);
+      if (tmp->name[0] < 16)
+	write_inst(tmp, fd_out);
       tmp = tmp->next;
     }
-  free(tmp);
 }

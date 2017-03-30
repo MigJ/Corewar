@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar 27 16:59:52 2017 Kévin Laspougeas
-** Last update Thu Mar 30 01:11:21 2017 Kévin Laspougeas
+** Last update Thu Mar 30 02:33:41 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -27,7 +27,11 @@ int	line_is_label(char *str, t_list *list)
 
   i = 0;
   while (str[i] != '\0' && str[i] != LABEL_CHAR)
-    i++;
+    {
+      if (str[i] == DIRECT_CHAR || str[i] == SEPARATOR_CHAR)
+	return (0);
+      i++;
+    }
   if (str[i] == LABEL_CHAR)
     {
       str[i] = '\0';
@@ -41,26 +45,20 @@ int	line_is_label(char *str, t_list *list)
 void	add_label(char *line, t_list *list, int pos)
 {
   int		i;
-  t_inst	label;
+  t_inst	*label;
 
   i = 0;
-  label.size = list->size;
+  label = malloc(sizeof(t_inst));
+  label->size = list->size;
   while (line[i] != LABEL_CHAR)
     i++;
-  label.name = my_strndup(line, i);
-  add_to_list(list, &label);
+  label->name = my_strndup(line, i);
+  add_to_list(list, label);
 }
 
 void	add_to_list(t_list *list, t_inst *to_add)
 {
-  to_add->next = NULL;
-  to_add->prev = list->last;
-  if (list->last)
-    list->last->next = to_add;
-  else
-    list->first = to_add;
-  list->last = to_add;
-  /*if (list->first == NULL)
+  if (list->first == NULL)
     {
       list->first = to_add;
       list->last = to_add;
@@ -73,7 +71,7 @@ void	add_to_list(t_list *list, t_inst *to_add)
       to_add->prev = list->last;
       list->last->next = to_add;
       list->last = to_add;
-      }*/
+      }
 }
 
 int	find_label(t_list *list, char *name)

@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Fri Mar 24 14:54:14 2017 Kévin Laspougeas
-** Last update Wed Mar 29 23:55:29 2017 Kévin Laspougeas
+** Last update Thu Mar 30 02:15:10 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -18,13 +18,14 @@ int	is_label(char *str);
 int	check_live(char *str, t_list *list)
 {
   char		c;
-  t_inst	live;
+  t_inst	*live;
 
   c = 1;
-  live.name = my_strdup(&c);
-  if (is_ind(str) != 1 || (my_getnbr(&str[1]) <= 0 || my_getnbr(&str[1]) > 4))
+  live = malloc(sizeof(t_inst));
+  live->name = my_strdup(&c);
+  if (is_dir(str) != 1 || (my_getnbr(&str[1]) <= 0 || my_getnbr(&str[1]) > 4))
     return (0);
-  return (fill_instruction(str, &live, list));
+  return (fill_instruction(str, live, list));
 }
 
 int	check_ld(char *str, t_list *list, char nme)
@@ -102,27 +103,29 @@ int	check_and(char *str, t_list *list, char nme)
 {
   int		i;
   int		y;
-  t_inst	and;
+  t_inst	*and;
 
   i = 0;
-  and.name = my_strdup(&nme);
-  if (str == NULL ||
-      (str[0] != 'r' && str[0] != DIRECT_CHAR && my_str_isnum(str) != 1))
+  and = malloc(sizeof(t_inst));
+  and->name = my_strdup(&nme);
+  if (str == NULL)
     return (0);
   while (str[i] != '\0' && str[i] != SEPARATOR_CHAR)
     i++;
-  y = str[i] != '\0' ? i : 0;
+  y = i++;
   while (str[i] != '\0' && str[i] != SEPARATOR_CHAR)
     i++;
-  if (is_reg(&str[i + 1]) != 1)
-    return (0);
   str[i] = '\0';
-  if (!(is_reg(&str[y + 1]) && is_dir(&str[y + 1]) && is_ind(&str[y + 1]) &&
-	is_label(&str[y + 1])))
+  if (is_reg(&str[i + 1]) != 1 && is_dir(&str[i + 1]) && is_ind(&str[i + 1])
+      != 1 && is_label(&str[i + 1]) != 1)
     return (0);
   str[y] = '\0';
-  if (!(is_reg(str) && is_dir(str) && is_ind(str) && is_label(str)))
+  if (is_dir(&str[y + 1]) != 1 && is_ind(&str[y + 1]) != 1 &&
+      is_label(&str[y + 1]) != 1)
+    return (0);
+  if (is_reg(str) != 1 && is_dir(str) != 1 && is_ind(str) != 1 &&
+      is_label(str) != 1)
     return (0);
   str[y] = str[i] = SEPARATOR_CHAR;
-  return (fill_instruction(str, &and, list));
+  return (fill_instruction(str, and, list));
 }

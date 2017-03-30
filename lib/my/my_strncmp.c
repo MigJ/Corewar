@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Tue Oct 11 10:36:58 2016 Kévin Laspougeas
-** Last update Wed Mar 29 23:16:45 2017 Kévin Laspougeas
+** Last update Thu Mar 30 01:59:20 2017 Kévin Laspougeas
 */
 
 int	my_strncmp(char *s1, char *s2, int n)
@@ -17,15 +17,11 @@ int	my_strncmp(char *s1, char *s2, int n)
     {
       while (i < n)
 	{
-	  while (s1[i] == s2[i])
-	    {
-	      if (i == n || s2[i] == '\0')
-		return (0);
-	      else if (s1[i] == '\0' && s2[i] == '\0')
-		return (0);
-	      i++;
-	    }
-	  return (-1);
+	  if (s1[i] == s2[i])
+	    i++;
+	  else
+	    return (-1);
 	}
+      return (0);
     }
 }

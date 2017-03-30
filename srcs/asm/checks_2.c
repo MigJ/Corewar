@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar 27 23:54:16 2017 Kévin Laspougeas
-** Last update Thu Mar 30 00:41:44 2017 Kévin Laspougeas
+** Last update Thu Mar 30 16:47:27 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -17,14 +17,15 @@ int	is_label(char *str);
 
 int	check_zjmp(char *str, t_list *list)
 {
-  t_inst	zjmp;
+  t_inst	*zjmp;
   char		c;
 
   c = 9;
-  zjmp.name = my_strdup(&c);
+  zjmp = malloc(sizeof(t_inst));
+  zjmp->name = my_strdup(&c);
   if (str == NULL || is_dir(str) != 1)
     return (0);
-  return (fill_instruction(str, &zjmp, list));
+  return (fill_instruction(str, zjmp, list));
 }
 
 int	check_ldi(char *str, t_list *list, char nme)
@@ -69,12 +70,12 @@ int	check_sti(char *str, t_list *list, char nme)
   while (str[i] != '\0' && str[i] != SEPARATOR_CHAR)
     i++;
   str[i] = '\0';
-  if (is_reg(&str[y + 1]) != 1 && is_dir(&str[y + 1]) != 1 &&
-      is_ind(&str[y + 1]) != 1 && is_label(&str[y + 1]) != 1)
+  if (is_reg(&str[i + 1]) != 1 && is_dir(&str[i + 1]) != 1 &&
+      is_ind(&str[i + 1]) != 1 && is_label(&str[i + 1]) != 1)
     return (0);
   str[y] = '\0';
-  if (is_reg(&str[i + 1]) != 1 && is_dir(&str[i + 1]) != 1 &&
-      is_ind(&str[i + 1]) != 1)
+  if (is_reg(&str[y + 1]) != 1 && is_dir(&str[y + 1]) != 1 &&
+      is_ind(&str[y + 1]) != 1)
     return (0);
   if (is_reg(str) != 1)
     return (0);
