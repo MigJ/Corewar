@@ -1,5 +1,5 @@
-	.name    "enculé"
-	.comment "teste de fils de p0te"
+.name    "enculé"
+.comment "teste de fils de p0te"
 
 live:	live %1
 	zjmp %:live
