@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar 27 23:54:16 2017 Kévin Laspougeas
-** Last update Fri Mar 31 17:42:19 2017 Kévin Laspougeas
+** Last update Fri Mar 31 17:55:15 2017 Joubert Miguel
 */
 
 #include "asm.h"
@@ -76,7 +76,7 @@ int	check_sti(char *str, t_list *list, char nme)
       return (0);
     x++;
   }
-  if (x < 2)
+  if (x != 3)
     return (0);
   return (fill_instruction(str, sti, list));
 }

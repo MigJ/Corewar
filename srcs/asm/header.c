@@ -5,7 +5,7 @@
 ** Login   <miguel.joubert@epitech.eu>
 ** 
 ** Started on  Mon Mar 27 22:26:45 2017 Joubert Miguel
-** Last update Fri Mar 31 15:47:14 2017 Kévin Laspougeas
+** Last update Fri Mar 31 17:03:03 2017 Joubert Miguel
 */
 
 #include <stdio.h>
@@ -40,9 +40,7 @@ static header_t		write_name(const int fd_s, const int fd_cor, header_t head)
 
 static header_t		write_size(const int fd_cor, header_t head)
 {
-  head.prog_size = 23;
-  head.prog_size = ((head.prog_size >> 24) & 0xff) | ((head.prog_size << 8) & 0xff0000) |
-    ((head.prog_size >> 8) & 0xff00) | ((head.prog_size << 24) & 0xff000000);
+  head.prog_size = 0;
   write(fd_cor, &head.prog_size, sizeof(int));
   return (head);
 }
