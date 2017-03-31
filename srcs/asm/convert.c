@@ -5,7 +5,7 @@
 ** Login   <miguel.joubert@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 01:57:24 2017 Joubert Miguel
-** Last update Fri Mar 31 22:23:13 2017 Joubert Miguel
+** Last update Fri Mar 31 23:40:38 2017 Joubert Miguel
 */
 
 #include <math.h>
@@ -102,7 +102,6 @@ char			*ret_content(char *line, t_inst *inst)
     if (is_label(argus[i])) {
       inst->lbl =
 	my_strcat(my_strdup(argus[i]), my_char_cat(",", pos));
-      new_args = chartab_to_char(new_args, 0, &j);
     }
     i++;
   }
