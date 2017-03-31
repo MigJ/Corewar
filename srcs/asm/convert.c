@@ -5,7 +5,7 @@
 ** Login   <miguel.joubert@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 01:57:24 2017 Joubert Miguel
-** Last update Fri Mar 31 01:06:14 2017 Kévin Laspougeas
+** Last update Fri Mar 31 14:03:48 2017 Kévin Laspougeas
 */
 
 #include <math.h>
@@ -57,7 +57,7 @@ char			*label_to_char(char *hex, char *args, int *j)
   return (hex);
 }
 
-char			*ret_content(char *line)
+char			*ret_content(char *line, t_inst *inst)
 {
   char			*new_args;
   char			**argus;
@@ -67,7 +67,7 @@ char			*ret_content(char *line)
   new_args = my_memset(ret_params_size(line) + T_LAB);
   if ((argus = malloc(sizeof(char *) * 10)) == NULL)
     return (NULL);
-  argus = my_str_sep(line, ',');
+  argus = my_str_sep(line, SEPARATOR_CHAR);
   j = i = 0;
   while (argus[i]) {
     if (is_reg(argus[i]) == 1)
@@ -76,8 +76,10 @@ char			*ret_content(char *line)
       new_args = chartab_to_char(new_args, my_getnbr(argus[i]), &j);
     else if (is_ind(argus[i]) == 1)
       new_args = int_to_char(new_args, my_getnbr(argus[i]), &j);
-    else if (is_label(argus[i]) == 1)
-      new_args = label_to_char(new_args, argus[i], &j);
+    else if (is_label(argus[i]) == 1) {
+      inst->lbl = my_strdup(argus[i]);
+      new_args = chartab_to_char(new_args, 0, &j);
+    }
     i++;
   }
   return (new_args);

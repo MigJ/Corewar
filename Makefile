@@ -5,7 +5,7 @@
 ## Login   <laspou_k@epitech.net>
 ## 
 ## Started on  Mon Mar  6 18:36:18 2017 Kévin Laspougeas
-## Last update Wed Mar 29 22:49:27 2017 Kévin Laspougeas
+## Last update Fri Mar 31 14:08:03 2017 Kévin Laspougeas
 ##
 
 CC		=	gcc -g3
@@ -34,6 +34,7 @@ SRCS_ASM	=	./srcs/asm/main.c		\
 			./srcs/asm/fill_inst.c		\
 			./srcs/asm/size_calc.c		\
 			./srcs/asm/header.c		\
+			./srcs/asm/epur_str.c		\
 
 SRCS_CORW	=	
 

@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar 27 23:22:10 2017 Kévin Laspougeas
-** Last update Fri Mar 31 00:33:12 2017 Kévin Laspougeas
+** Last update Fri Mar 31 13:52:08 2017 Kévin Laspougeas
 */
 
 #include <string.h>
@@ -30,7 +30,7 @@ int	is_ind(char *str)
 
 int	is_label(char *str)
 {
-  if (str == NULL || (str[0] != LABEL_CHAR && str[0] != DIRECT_CHAR) ||
+  if (str == NULL || (str[0] != LABEL_CHAR && str[1] != LABEL_CHAR) ||
       (str[0] == DIRECT_CHAR && str[1] != LABEL_CHAR))
     return (0);
   return (1);

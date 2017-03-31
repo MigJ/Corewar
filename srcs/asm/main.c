@@ -5,15 +5,14 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Mon Mar  6 18:21:54 2017 Kévin Laspougeas
-** Last update Thu Mar 30 18:38:14 2017 Kévin Laspougeas
+** Last update Fri Mar 31 14:18:12 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
-#include <stdio.h>
 
 int	check_args(char *str, t_list *list)
 {
-  return (my_strncmp(str, "live ", 3) == 0 ? check_live(&str[5], list) :
+  return (my_strncmp(str, "live ", 5) == 0 ? check_live(&str[5], list) :
 	  my_strncmp(str, "ld ", 3) == 0 ? check_ld(&str[3], list, 2) :
 	  my_strncmp(str, "st ", 3) == 0 ? check_st(&str[3], list) :
 	  my_strncmp(str, "add ", 4) == 0 ? check_add_sub(&str[4], list, 4) :
@@ -24,7 +23,7 @@ int	check_args(char *str, t_list *list)
 	  my_strncmp(str, "zjmp ", 5) == 0 ? check_zjmp(&str[5], list) :
 	  my_strncmp(str, "ldi ", 4) == 0 ? check_ldi(&str[4], list, 10) :
 	  my_strncmp(str, "sti ", 4) == 0 ? check_sti(&str[4], list, 11) :
-	  my_strncmp(str, "fork ", 5) == 0 ? check_fork(&str[5], list, 12) :
+	  my_strncmp(str, "fork ", 3) == 0 ? check_fork(&str[5], list, 12) :
 	  my_strncmp(str, "lld ", 4) == 0 ? check_ld(&str[4], list, 13) :
 	  my_strncmp(str, "lldi ", 5) == 0 ? check_ldi(&str[5], list, 14) :
 	  my_strncmp(str, "lfork ", 6) == 0 ? check_fork(&str[6], list, 15) :
@@ -40,7 +39,7 @@ void	check_mnemo(char *str, int l)
       my_strncmp(str, "zjmp ", 5) != 0 && my_strncmp(str, "ldi ", 4) != 0 &&
       my_strncmp(str, "sti ", 4) != 0 && my_strncmp(str, "fork ", 5) != 0 &&
       my_strncmp(str, "lld ", 4) != 0 && my_strncmp(str, "lldi ", 5) != 0 &&
-      my_strncmp(str, "lfork ", 6) != 0 && my_strncmp(str, "aff ", 4) != 0)
+      my_strncmp(str, "lfork ", 4) != 0 && my_strncmp(str, "aff ", 4) != 0)
     exit_error(str, l, WRG_MNEMO);
 }
 
@@ -51,7 +50,7 @@ void	check_code(const int fd, const int fd_out, t_list *list)
   int		r;
 
   lines = 1;
-  while ((line = get_next_line(fd)) != NULL)
+  while ((line = epur_str(get_next_line(fd))) != NULL)
     {
       if ((r = line_is_label(line, list)) >= 1)
 	{

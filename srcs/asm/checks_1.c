@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Fri Mar 24 14:54:14 2017 Kévin Laspougeas
-** Last update Thu Mar 30 18:03:13 2017 Kévin Laspougeas
+** Last update Fri Mar 31 14:14:20 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -57,7 +57,7 @@ int	check_st(char *str, t_list *list)
 
   i = 0;
   st = malloc(sizeof(t_inst));
-  st->name = my_strdup((char*)3);
+  st->name = (char*)3;
   if (str == NULL || my_strlen(str) < 4 || str[0] != 'r')
     return (0);
   while (str[i] != '\0' && str[i] != SEPARATOR_CHAR)
