@@ -5,7 +5,7 @@
 ** Login   <miguel.joubert@epitech.eu>
 ** 
 ** Started on  Mon Mar 27 22:35:07 2017 Joubert Miguel
-** Last update Wed Mar 29 22:22:29 2017 Kévin Laspougeas
+** Last update Fri Mar 31 15:12:38 2017 Joubert Miguel
 */
 
 #include <stdlib.h>
@@ -53,4 +53,33 @@ char    **my_str_sep(char *str, char sep)
     }
   arr[++j] = NULL;
   return (arr);
+}
+
+char    *my_str_cat(char *dest, char *src)
+{
+  char  *res;
+  int   i;
+  int   j;
+  int   write;
+
+  if (dest == NULL)
+    return (src);
+  if (src == NULL)
+    return (dest);
+  j = i = 0;
+  while (dest[i])
+    i++;
+  while (src[j])
+    j++;
+  if ((res = malloc(sizeof(char) * ((i + j + 1) * 100))) == NULL)
+    return (NULL);
+  i = -1;
+  write = 0;
+  while (dest[++i])
+    res[write++] = dest[i];
+  i = -1;
+  while (src[++i])
+    res[write++] = src[i];
+  res[write] = '\0';
+  return (res);
 }
