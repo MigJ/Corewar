@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Fri Mar 31 02:02:37 2017 Kévin Laspougeas
-** Last update Fri Mar 31 15:46:19 2017 Kévin Laspougeas
+** Last update Fri Mar 31 17:22:14 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -23,7 +23,7 @@ int	is_rg(char *args, int p)
 {
   char	**argus;
 
-  argus = my_strsep(args, SEPARATOR_CHAR);
+  argus = my_str_sep(args, SEPARATOR_CHAR);
   return (is_reg(argus[p - 1]));
 }
 
@@ -31,7 +31,7 @@ int	is_dr(char *args, int p)
 {
   char	**argus;
 
-  argus = my_strsep(args, SEPARATOR_CHAR);
+  argus = my_str_sep(args, SEPARATOR_CHAR);
   return (is_dir(argus[p - 1]));
 }
 
