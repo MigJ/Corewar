@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Wed Mar 29 13:59:47 2017 Kévin Laspougeas
-** Last update Thu Mar 30 18:37:24 2017 Kévin Laspougeas
+** Last update Fri Mar 31 17:18:24 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -13,9 +13,12 @@
 void	write_inst(t_inst *inst, const int fd_out)
 {
   write(fd_out, inst->name, 1);
-  if (inst->c_byte != 0)
+  if (inst->name[0] != 1 && inst->name[0] != 9 && inst->name[0] != 12 &&
+      inst->name[0] != 15)
     write(fd_out, &inst->c_byte, 1);
-  write(fd_out, inst->args, inst->size);
+  write(fd_out, inst->args, inst->size - (inst->name[0] == 1 ||
+	inst->name[0] == 9 || inst->name[0] == 12 || inst->name[0] == 15 ?
+					  1 : 2));
 }
 
 void	write_size_head(const int fd_out, t_list *list)

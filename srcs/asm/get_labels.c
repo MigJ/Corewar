@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar 27 16:59:52 2017 Kévin Laspougeas
-** Last update Fri Mar 31 16:42:41 2017 Kévin Laspougeas
+** Last update Fri Mar 31 17:18:36 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -58,6 +58,10 @@ void	add_label(char *line, t_list *list, int pos)
 
 void	add_to_list(t_list *list, t_inst *to_add)
 {
+  if (to_add->name[0] <= 16) {
+    to_add->size += to_add->name[0] == 1 || to_add->name[0] == 9 ||
+      to_add->name[0] == 12 || to_add->name[0] == 15 ? 1 : 2;
+  }
   if (list->first == NULL)
     {
       list->first = to_add;
@@ -74,8 +78,6 @@ void	add_to_list(t_list *list, t_inst *to_add)
       }
   if (to_add->name[0] <= 16) {
     list->size += to_add->size;
-    list->size += to_add->name[0] == 1 || to_add->name[0] == 9 ||
-      to_add->name[0] == 11 || to_add->name[0] == 15 ? 1 : 2;
   }
 }
 

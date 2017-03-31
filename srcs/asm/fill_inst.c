@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Wed Mar 29 18:16:25 2017 Kévin Laspougeas
-** Last update Fri Mar 31 16:35:48 2017 Kévin Laspougeas
+** Last update Fri Mar 31 17:03:52 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -41,7 +41,7 @@ void	run_label(t_inst *tmp, char *to_find, t_list *list, int size)
 
   diff = 0;
   tmp2 = list->first;
-  while (tmp2 != NULL && my_strstr(to_find, tmp2->lbl) == NULL)
+  while (tmp2 != NULL && my_strstr(to_find, tmp2->name) == NULL)
     {
       diff += tmp2->size;
       tmp2 = tmp2->next;
