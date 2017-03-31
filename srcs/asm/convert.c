@@ -5,7 +5,7 @@
 ** Login   <miguel.joubert@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 01:57:24 2017 Joubert Miguel
-** Last update Fri Mar 31 15:17:45 2017 Joubert Miguel
+** Last update Fri Mar 31 15:34:55 2017 Joubert Miguel
 */
 
 #include <math.h>
@@ -57,15 +57,28 @@ char			*label_to_char(char *hex, char *args, int *j)
   return (hex);
 }
 
+char			get_oct_pos(char *oct, int i)
+{
+  char			sum;
+
+  sum = 0;
+  while (i <= 0)
+    {
+      sum += (oct[i] - 48);
+      i++;
+    }
+  return (sum + 48);
+}
+
 char			*ret_content(char *line, t_inst *inst)
 {
   char			*new_args;
   char			**argus;
   char			*sbs;
+  char			pos;
   int			i;
   int			j;
   int			k;
-  char			size;
 
   sbs = my_memset(4);
   new_args = my_memset(ret_params_size(line) + T_LAB);
@@ -75,6 +88,7 @@ char			*ret_content(char *line, t_inst *inst)
   k = j = i = 0;
   while (argus[k]) {
     sbs = ret_size_sbs(argus[k], inst->name);
+    pos = get_oct_pos(sbs, i);
     while (sbs[i]) {
       if (sbs[i] == '1')
 	new_args[j++] = argus[i][1] - 48;
@@ -83,11 +97,11 @@ char			*ret_content(char *line, t_inst *inst)
       else if (sbs[i] == '4')
 	new_args = int_to_char(new_args, my_getnbr(argus[i]), &j);
       else {
-	inst->lbl = my_strcat(my_strdup(argus[i]), my_str_cat(",", &size));
+	inst->lbl =
+	  my_strcat(my_strdup(argus[i]), my_str_cat(",", &pos));
 	new_args = chartab_to_char(new_args, 0, &j);
       }
       i++;
-      size = i;
     }
     k++;
   }
