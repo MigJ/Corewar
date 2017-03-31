@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Mon Mar  6 18:21:54 2017 Kévin Laspougeas
-** Last update Fri Mar 31 18:51:09 2017 Kévin Laspougeas
+** Last update Fri Mar 31 23:35:33 2017 Kévin Laspougeas
 */
 
 #include <stdio.h>
@@ -95,7 +95,8 @@ int	main(int ac, char **av)
     usage(av[0]);
   else if (ac >= 2 && (fd = open(av[1], O_RDONLY)) != -1)
     {
-      if ((fd_out = open("./out.cor", O_CREAT | O_RDWR | O_TRUNC, 0666)) <= 0)
+      if ((fd_out = open(out_file(av[1]), O_CREAT | O_RDWR | O_TRUNC, 0666))
+	  <= 0)
 	return (84);
       list = make_list();
       create_header(fd, fd_out, &head);

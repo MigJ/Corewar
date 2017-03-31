@@ -5,10 +5,31 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Tue Mar 28 03:05:46 2017 Kévin Laspougeas
-** Last update Fri Mar 31 01:34:40 2017 Kévin Laspougeas
+** Last update Fri Mar 31 23:47:35 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
+
+int	is_s(char *arg)
+{
+  if (arg[my_strlen(arg)] == '\0' && arg[my_strlen(arg) - 1] == 's' &&
+      arg[my_strlen(arg) - 2] == '.')
+    return (my_strlen(arg) - 2);
+  return (-1);
+}
+
+char	*out_file(char *arg)
+{
+  char	*out;
+  int	i;
+
+  i = -1;
+  out = my_memset(my_strlen(arg));
+  while (arg[++i] != '\0' && i < is_s(arg))
+    out[i] = arg[i];
+  out = my_strcat(out, ".cor");
+  return (out);
+}
 
 int	is_in_label_char(char c, char *chars)
 {
