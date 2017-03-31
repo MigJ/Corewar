@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Mon Mar  6 18:21:54 2017 Kévin Laspougeas
-** Last update Fri Mar 31 23:35:33 2017 Kévin Laspougeas
+** Last update Sat Apr  1 00:08:26 2017 Kévin Laspougeas
 */
 
 #include <stdio.h>
@@ -58,7 +58,7 @@ void	check_code(const int fd, const int fd_out, t_list *list)
   lines = 1;
   while ((line = rm_tab(get_next_line(fd))) != NULL)
     {
-      if ((r = line_is_label(line, list)) >= 1)
+      if ((r = line_is_label(line, list)) >= 1 && line[0] != COMMENT_CHAR)
 	{
 	  add_label(line, list, lines);
 	  line = &line[r + 2];

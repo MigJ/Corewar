@@ -5,10 +5,9 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Fri Mar 24 14:54:14 2017 Kévin Laspougeas
-** Last update Fri Mar 31 17:51:00 2017 Kévin Laspougeas
+** Last update Sat Apr  1 00:22:36 2017 Kévin Laspougeas
 */
 
-#include <stdio.h>
 #include "asm.h"
 
 int	is_reg(char *str);
@@ -24,7 +23,7 @@ int	check_live(char *str, t_list *list)
   c = 1;
   live = malloc(sizeof(t_inst));
   live->name = my_strdup(&c);
-  if (is_dir(str) != 1 || (my_getnbr(&str[1]) <= 0 || my_getnbr(&str[1]) > 4))
+  if (is_dir(str) != 1 || my_getnbr(&str[1]) < 0)
     return (0);
   return (fill_instruction(str, live, list));
 }

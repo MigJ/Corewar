@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar  6 18:25:42 2017 Kévin Laspougeas
-** Last update Fri Mar 31 23:49:02 2017 Kévin Laspougeas
+** Last update Sat Apr  1 00:19:04 2017 Kévin Laspougeas
 */
 
 #ifndef		__ASM_H__
@@ -79,6 +79,7 @@ int		find_label(t_list *list, char *name);
 char		**my_str_sep(char*, char);
 char		*my_memset(int);
 char		*ret_size_sbs(char *args, char *nme);
+int		is_in_twice(char *to_find, t_list *list);
 
 /*
 **		COMPILATION

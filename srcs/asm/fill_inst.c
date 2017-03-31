@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Wed Mar 29 18:16:25 2017 Kévin Laspougeas
-** Last update Fri Mar 31 17:28:35 2017 Kévin Laspougeas
+** Last update Sat Apr  1 00:14:53 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -46,7 +46,7 @@ void	run_label(t_inst *tmp, char *to_find, t_list *list, int size)
       diff += tmp2->size;
       tmp2 = tmp2->next;
     }
-  if (tmp2 != NULL)
+  if (tmp2 != NULL && is_in_twice(to_find, list) != 0)
     place_label(tmp, diff - size, list, get_place(tmp));
   else
     exit_stage_2(to_find, list, WRG_LABEL);

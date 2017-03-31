@@ -5,10 +5,27 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Tue Mar 28 03:05:46 2017 Kévin Laspougeas
-** Last update Fri Mar 31 23:47:35 2017 Kévin Laspougeas
+** Last update Sat Apr  1 00:19:30 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
+
+int	is_in_twice(char *to_find, t_list *list)
+{
+  t_inst	*tmp;
+  int		i;
+
+  tmp = list->first;
+  i = 0;
+  while (tmp != NULL) {
+    if (my_strstr(tmp->name, to_find) != NULL)
+      i++;
+    tmp = tmp->next;
+    if (i > 1)
+      return (1);
+  }
+  return (0);
+}
 
 int	is_s(char *arg)
 {
