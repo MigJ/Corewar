@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar 27 23:54:16 2017 Kévin Laspougeas
-** Last update Fri Mar 31 15:08:08 2017 Kévin Laspougeas
+** Last update Fri Mar 31 17:42:19 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -23,7 +23,7 @@ int	check_zjmp(char *str, t_list *list)
   c = 9;
   zjmp = malloc(sizeof(t_inst));
   zjmp->name = my_strdup(&c);
-  if (str == NULL || is_dir(str) != 1)
+  if (str == NULL || (is_dir(str) != 1 && is_label(str) != 1))
     return (0);
   return (fill_instruction(str, zjmp, list));
 }
@@ -55,32 +55,29 @@ int	check_ldi(char *str, t_list *list, char nme)
 
 int	check_sti(char *str, t_list *list, char nme)
 {
-  int		i;
-  int		y;
+  int		x;
+  char		**args;
   t_inst	*sti;
 
-  i = y = 0;
+  x = 0;
   sti = malloc(sizeof(*sti));
-  sti->name = my_memset(45);
-  sti->name[0] = nme;
+  sti->name = my_strdup(&nme);
   if (str == NULL)
     return (0);
-  while (str[i] != '\0' && str[i] != SEPARATOR_CHAR)
-    i++;
-  y = i++;
-  while (str[i] != '\0' && str[i] != SEPARATOR_CHAR)
-    i++;
-  str[i] = '\0';
-  if (is_reg(&str[i + 1]) != 1 && is_dir(&str[i + 1]) != 1 &&
-      is_ind(&str[i + 1]) != 1 && is_label(&str[i + 1]) != 1)
+  args = my_str_sep(str, SEPARATOR_CHAR);
+  while (args[x] != NULL) {
+    if (x == 0 && !is_reg(args[x]))
+      return (0);
+    else if (x == 1 && !is_reg(args[x]) && !is_dir(args[x]) &&
+	     !is_label(args[x]) && !is_ind(args[x]))
+      return (0);
+    else if (x == 2 && !is_reg(args[x]) && !is_dir(args[x]) &&
+	     !is_label(args[x]) && !is_ind(args[x]))
+      return (0);
+    x++;
+  }
+  if (x < 2)
     return (0);
-  str[y] = '\0';
-  if (is_reg(&str[y + 1]) != 1 && is_dir(&str[y + 1]) != 1 &&
-      is_ind(&str[y + 1]) != 1)
-    return (0);
-  if (is_reg(str) != 1)
-    return (0);
-  str[y] = str[i] = SEPARATOR_CHAR;
   return (fill_instruction(str, sti, list));
 }
 

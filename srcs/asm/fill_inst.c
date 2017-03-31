@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Wed Mar 29 18:16:25 2017 Kévin Laspougeas
-** Last update Fri Mar 31 17:03:52 2017 Kévin Laspougeas
+** Last update Fri Mar 31 17:28:35 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -64,12 +64,12 @@ void	fill_labels(t_list *list)
     {
       while (tmp != NULL)
 	{
-	  size += tmp->size;
 	  if ((to_find = is_there_a_label(tmp)) != NULL)
 	    {
 	      run_label(tmp, to_find, list, size);
 	      free(to_find);
 	    }
+	  size += tmp->size;
 	  tmp = tmp->next;
 	}
     }
