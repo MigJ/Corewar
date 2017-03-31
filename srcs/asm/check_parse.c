@@ -5,10 +5,19 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Fri Mar 31 02:02:37 2017 Kévin Laspougeas
-** Last update Fri Mar 31 14:53:42 2017 Joubert Miguel
+** Last update Fri Mar 31 15:25:20 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
+
+int	get_place(t_inst *inst)
+{
+  int	i;
+
+  while (inst->lbl[i] != SEPARATOR_CHAR)
+    i++;
+  return (my_getnbr(&inst->lbl[i + 1]));
+}
 
 int	is_rg(char *args, int p)
 {

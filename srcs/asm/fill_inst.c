@@ -5,50 +5,30 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Wed Mar 29 18:16:25 2017 Kévin Laspougeas
-** Last update Fri Mar 31 14:00:56 2017 Kévin Laspougeas
+** Last update Fri Mar 31 15:18:16 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
 
 char	*is_there_a_label(t_inst *inst)
 {
-  int	i;
-  int	j;
-  char	*ret;
-
-  i = j = 0;
-  ret = my_memset(T_LAB + 1);
-  while (i < inst->size && is_in_label_char(inst->args[i], LABEL_CHARS) != 1)
-    i++;
-  while (is_in_label_char(inst->args[i], LABEL_CHARS) == 1)
-    ret[j++] = inst->args[i++];
-  ret[j] = '\0';
-  return (ret[0] == '\0' ? NULL : ret);
+  if (inst->lbl != NULL)
+    return (inst->lbl);
+  return (NULL);
 }
 
-void	place_label(t_inst *inst, int offset, t_list *list)
+      void	place_label(t_inst *inst, int offset, t_list *list, int place)
 {
   int	i;
   char	*add;
   
   i = -1;
-  add = my_memset(inst->size);
-  while (++i < inst->size && inst->args[i] <= 16)
-    add[i] = inst->args[i];
-  if (inst->args[i] > 16)
-    {
-      i--;
-      add = int_to_char(add, offset, &i);
-      i--;
-      while (++i < inst->size)
-	add[i] = inst->args[i];
-      i = -1;
-      while (++i < inst->size)
-	inst->args[i] = add[i];
-      free(add);
-    }
-  else
-    exit_stage_2(inst->name, list, WRG_LABEL);
+  add = my_memset(2);
+  while (i < place)
+    i++;
+  add = chartab_to_char(add, offset, 0);
+  inst->args[i] = add[0];
+  inst->args[i + 1] = add[1];
 }
 
 void	run_label(t_inst *tmp, t_inst *tmp2, char *to_find, t_list *list)
@@ -61,8 +41,8 @@ void	run_label(t_inst *tmp, t_inst *tmp2, char *to_find, t_list *list)
       diff += tmp2->size;
       tmp2 = tmp2->next;
     }
-  if (tmp != NULL)
-    place_label(tmp, diff - tmp->size, list);
+  if (tmp2 != NULL)
+    place_label(tmp, diff - tmp->size, list, get_place(tmp));
   else
     exit_stage_2(to_find, list, WRG_LABEL);
 }

@@ -5,29 +5,34 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Mon Mar  6 18:21:54 2017 Kévin Laspougeas
-** Last update Fri Mar 31 14:18:12 2017 Kévin Laspougeas
+** Last update Fri Mar 31 14:59:33 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
 
 int	check_args(char *str, t_list *list)
 {
-  return (my_strncmp(str, "live ", 5) == 0 ? check_live(&str[5], list) :
-	  my_strncmp(str, "ld ", 3) == 0 ? check_ld(&str[3], list, 2) :
-	  my_strncmp(str, "st ", 3) == 0 ? check_st(&str[3], list) :
-	  my_strncmp(str, "add ", 4) == 0 ? check_add_sub(&str[4], list, 4) :
-	  my_strncmp(str, "sub ", 4) == 0 ? check_add_sub(&str[4], list, 5) :
-	  my_strncmp(str, "and ", 4) == 0 ? check_and(&str[4], list, 6) :
-	  my_strncmp(str, "or ", 3) == 0 ? check_and(&str[3], list, 7) :
-	  my_strncmp(str, "xor ", 4) == 0 ? check_and(&str[4], list, 8) :
-	  my_strncmp(str, "zjmp ", 5) == 0 ? check_zjmp(&str[5], list) :
-	  my_strncmp(str, "ldi ", 4) == 0 ? check_ldi(&str[4], list, 10) :
-	  my_strncmp(str, "sti ", 4) == 0 ? check_sti(&str[4], list, 11) :
-	  my_strncmp(str, "fork ", 3) == 0 ? check_fork(&str[5], list, 12) :
-	  my_strncmp(str, "lld ", 4) == 0 ? check_ld(&str[4], list, 13) :
-	  my_strncmp(str, "lldi ", 5) == 0 ? check_ldi(&str[5], list, 14) :
-	  my_strncmp(str, "lfork ", 6) == 0 ? check_fork(&str[6], list, 15) :
-	  my_strncmp(str, "aff ", 4) == 0 ? check_aff(&str[4], list) : 0);
+  return (my_strncmp(str, "live ", 5) == 0 ? check_live(epu(&str[5]), list) :
+	  my_strncmp(str, "ld ", 3) == 0 ? check_ld(epu(&str[3]), list, 2) :
+	  my_strncmp(str, "st ", 3) == 0 ? check_st(epu(&str[3]), list) :
+	  my_strncmp(str, "add ", 4) == 0 ? check_add_sub(epu(&str[4]),
+							  list, 4) :
+	  my_strncmp(str, "sub ", 4) == 0 ? check_add_sub(epu(&str[4]),
+							  list, 5) :
+	  my_strncmp(str, "and ", 4) == 0 ? check_and(epu(&str[4]), list, 6) :
+	  my_strncmp(str, "or ", 3) == 0 ? check_and(epu(&str[3]), list, 7) :
+	  my_strncmp(str, "xor ", 4) == 0 ? check_and(epu(&str[4]), list, 8) :
+	  my_strncmp(str, "zjmp ", 5) == 0 ? check_zjmp(epu(&str[5]), list) :
+	  my_strncmp(str, "ldi ", 4) == 0 ? check_ldi(epu(&str[4]), list, 10) :
+	  my_strncmp(str, "sti ", 4) == 0 ? check_sti(epu(&str[4]), list, 11) :
+	  my_strncmp(str, "fork ", 3) == 0 ? check_fork(epu(&str[5]),
+							list, 12) :
+	  my_strncmp(str, "lld ", 4) == 0 ? check_ld(epu(&str[4]), list, 13) :
+	  my_strncmp(str, "lldi ", 5) == 0 ? check_ldi(epu(&str[5]),
+						       list, 14) :
+	  my_strncmp(str, "lfork ", 6) == 0 ? check_fork(epu(&str[6]),
+							 list, 15) :
+	  my_strncmp(str, "aff ", 4) == 0 ? check_aff(epu(&str[4]), list) : 0);
 }
 
 void	check_mnemo(char *str, int l)
@@ -50,7 +55,7 @@ void	check_code(const int fd, const int fd_out, t_list *list)
   int		r;
 
   lines = 1;
-  while ((line = epur_str(get_next_line(fd))) != NULL)
+  while ((line = rm_tab(get_next_line(fd))) != NULL)
     {
       if ((r = line_is_label(line, list)) >= 1)
 	{

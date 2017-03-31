@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar 27 23:54:16 2017 Kévin Laspougeas
-** Last update Thu Mar 30 18:04:35 2017 Kévin Laspougeas
+** Last update Fri Mar 31 15:08:08 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -30,26 +30,26 @@ int	check_zjmp(char *str, t_list *list)
 
 int	check_ldi(char *str, t_list *list, char nme)
 {
-  int		i;
-  int		y;
+  int		x;
+  char		**args;
   t_inst	*ldi;
 
-  i = 0;
   ldi = malloc(sizeof(t_inst));
   ldi->name = my_strdup(&nme);
   if (str == NULL)
     return (0);
-  while (str[i] != '\0' && str[i] != SEPARATOR_CHAR)
-    i++;
-  y = str[i] != '\0' ? 1 : 0;
-  while (str[i] != '\0' && str[i] != SEPARATOR_CHAR)
-    i++;
-  if (is_reg(&str[i + 1]) != 1)
+  args = my_str_sep(str, SEPARATOR_CHAR);
+  while (args[x] != NULL) {
+    if (x == 0 && !is_dir(args[x]) && !is_ind(args[x]))
+      return (0);
+    else if (x == 1 && !is_dir(args[x]) && !is_ind(args[x]))
+      return (0);
+    else if (x == 2 && !is_reg(args[x]))
+      return (0);
+    x++;
+  }
+  if (x < 2)
     return (0);
-  str[i] = '\0';
-  if (is_dir(&str[y + 1]) != 1 && is_ind(&str[y + 1]) != 1)
-    return (0);
-  str[i] = str[y] = SEPARATOR_CHAR;
   return (fill_instruction(str, ldi, list));
 }
 

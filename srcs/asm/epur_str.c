@@ -5,12 +5,27 @@
 ** Login   <miguel.joubert@epitech.eu>
 ** 
 ** Started on  Wed Mar 15 13:06:25 2017 Joubert Miguel
-** Last update Fri Mar 31 14:32:51 2017 Kévin Laspougeas
+** Last update Fri Mar 31 15:04:39 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
 
-char		*epur_str(char *s)
+char		*rm_tab(char *s)
+{
+  int		i;
+  int		j;
+
+  i = j = 0;
+  if (s != NULL)
+    {
+      while ((s[i] == ' ' || s[i] == '\t') && s[i] != '\0')
+	i++;
+      return (s[i] == '\0' ? s : &s[i]);
+    }
+  return (NULL);
+}
+
+char		*epu(char *s)
 {
   char		*str;
   size_t	i;

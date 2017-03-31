@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar  6 18:25:42 2017 Kévin Laspougeas
-** Last update Fri Mar 31 14:47:57 2017 Joubert Miguel
+** Last update Fri Mar 31 15:24:29 2017 Kévin Laspougeas
 */
 
 #ifndef		__ASM_H__
@@ -62,6 +62,9 @@ void		add_label(char *line, t_list *list, int pos);
 void		exit_error(char *str, int line, int cas);
 void		get_size(char *str, t_inst *inst, t_list *list);
 char		*epur_str(char *str);
+char		*epu(char *s);
+char		*rm_tab(char *s);
+char		*my_str_cat(char*, char*);
 
 /*
 **		CHAINED LISTS
@@ -91,6 +94,8 @@ void		fill_labels(t_list *list);
 char		*int_to_char(char *hex, int nb, int *j);
 int		is_in_label_char(char c, char *l_char);
 int		is_label(char *str);
+char		*chartab_to_char(char *s, int nb, int *i);
+int		get_place(t_inst *inst);
 
 /*
 **		OUTPUT TO FILE
