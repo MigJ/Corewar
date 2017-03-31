@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Fri Mar 31 02:02:37 2017 Kévin Laspougeas
-** Last update Fri Mar 31 13:48:44 2017 Kévin Laspougeas
+** Last update Fri Mar 31 14:53:42 2017 Joubert Miguel
 */
 
 #include "asm.h"
@@ -26,7 +26,7 @@ int	is_dr(char *args, int p)
   return (is_dir(argus[p - 1]));
 }
 
-char	*set_three_params(char *args, char *name)
+char	*set_three_params(char *args, char *nme)
 {
   char	*ret;
 
@@ -47,20 +47,18 @@ char	*set_three_params(char *args, char *name)
 
 char	*ret_size_sbs(char *args, char *nme)
 {
-  int	i;
   char	*ret;
 
-  i = 0;
+  ret = my_memset(4);
   if (nme[0] > 16)
     return (nme);
   if (nme[0] == 1 || nme[0] == 9 || nme[0] == 12 || nme[0] == 15 ||
       nme[0] == 16)
     return (nme[0] == 1 ? "4" : nme[0] == 9 || nme[0] == 12 ? "2" :
 	    nme[0] == 15 ? "2" : "1");
-  ret = my_memset(4);
   else if (nme[0] == 2 || nme[0] == 3 || nme[0] == 13) {
     ret[0] = nme[0] == 2 || nme[0] == 13 ?
-      (is_dr(args, 1) ? '2' : is_rg(args 1) ? '1' : '2') : '1';
+      (is_dr(args, 1) ? '2' : is_rg(args, 1) ? '1' : '2') : '1';
     ret[1] = nme[0] == 3 ? (is_rg(args, 2) ? '1' : '2') : '1';
     ret[2] = '\0';
   }

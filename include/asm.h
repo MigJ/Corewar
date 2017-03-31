@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar  6 18:25:42 2017 Kévin Laspougeas
-** Last update Fri Mar 31 14:08:20 2017 Kévin Laspougeas
+** Last update Fri Mar 31 14:47:57 2017 Joubert Miguel
 */
 
 #ifndef		__ASM_H__
@@ -72,7 +72,7 @@ void		add_to_list(t_list *list, t_inst *to_add);
 int		find_label(t_list *list, char *name);
 char		**my_str_sep(char*, char);
 char		*my_memset(int);
-
+char		*ret_size_sbs(char *args, char *nme);
 
 /*
 **		COMPILATION
