@@ -5,11 +5,41 @@
 ** Login   <miguel.joubert@epitech.eu>
 ** 
 ** Started on  Mon Mar 27 22:35:07 2017 Joubert Miguel
-** Last update Fri Mar 31 15:12:38 2017 Joubert Miguel
+** Last update Fri Mar 31 23:20:27 2017 Joubert Miguel
 */
 
 #include <stdlib.h>
 #include "asm.h"
+
+int     my_sign(char *str)
+{
+  int   i;
+
+  i = 0;
+  while (str[i] == '-')
+    i++;
+  return (i % 2);
+}
+
+int     my_get_nbr(char *str)
+{
+  int   i;
+  int   sign;
+  int   nb;
+
+  i = nb = sign = 0;
+  while (str[i] < '0' || str[i] > '9')
+    i++;
+  while (str[i] >= '0' && str[i] <= '9')
+    {
+      nb += str[i] - 48;
+      nb *= 10;
+      i++;
+    }
+  nb /= 10;
+  if (sign == 1) nb *= -1;
+  return (nb);
+}
 
 char    *my_memset(int size)
 {
@@ -81,5 +111,20 @@ char    *my_str_cat(char *dest, char *src)
   while (src[++i])
     res[write++] = src[i];
   res[write] = '\0';
+  return (res);
+}
+
+char	*my_char_cat(char *src, char c)
+{
+  int	i;
+  char	*res;
+
+  if (src == NULL)
+    return (src);
+  i = -1;
+  res = my_memset(my_strlen(src) + 1);
+  while (src[++i])
+    res[i] = src[i];
+  res[i] = c;
   return (res);
 }

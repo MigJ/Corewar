@@ -5,7 +5,7 @@
 ** Login   <miguel.joubert@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 02:24:15 2017 Joubert Miguel
-** Last update Fri Mar 31 16:40:52 2017 Kévin Laspougeas
+** Last update Fri Mar 31 18:05:48 2017 Joubert Miguel
 */
 
 #include <string.h>
@@ -59,11 +59,11 @@ int		ret_oct_from_line(char *line)
   argus = my_str_sep(line, ',');
   while (argus[i])
     {
-      if (is_reg(argus[i]) == 1)
+      if (is_reg(argus[i]))
 	bin = my_strcat(bin, "01");
-      else if (is_dir(argus[i]) == 1)
+      else if (is_dir(argus[i]) || is_label(argus[i]))
 	bin = my_strcat(bin, "10");
-      else if (is_ind(argus[i]) == 1)
+      else if (is_ind(argus[i]))
 	bin = my_strcat(bin, "11");
       i++;
     }

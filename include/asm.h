@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar  6 18:25:42 2017 Kévin Laspougeas
-** Last update Fri Mar 31 16:20:43 2017 Kévin Laspougeas
+** Last update Fri Mar 31 22:22:48 2017 Joubert Miguel
 */
 
 #ifndef		__ASM_H__
@@ -65,6 +65,9 @@ char		*epur_str(char *str);
 char		*epu(char *s);
 char		*rm_tab(char *s);
 char		*my_str_cat(char*, char*);
+char		*my_char_cat(char *, char);
+int		my_get_nbr(char *str);
+int		my_sign(char *str);
 
 /*
 **		CHAINED LISTS

@@ -5,7 +5,7 @@
 ** Login   <miguel.joubert@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 01:57:24 2017 Joubert Miguel
-** Last update Fri Mar 31 16:35:27 2017 Kévin Laspougeas
+** Last update Fri Mar 31 22:23:13 2017 Joubert Miguel
 */
 
 #include <math.h>
@@ -18,7 +18,10 @@
 
 char			*chartab_to_char(char *hex, int nb, int *j)
 {
-  hex[*j] = nb / 256;
+  if (nb >= 0)
+    hex[*j] = nb / 256;
+  else
+    hex[*j] = -1;
   *j += 1;
   hex[*j] = nb % 256;
   *j += 1;
@@ -93,12 +96,12 @@ char			*ret_content(char *line, t_inst *inst)
     if (sbs[i] == '1')
       new_args[j++] = argus[i][1] - 48;
     else if (sbs[i] == '2')
-      new_args = chartab_to_char(new_args, my_getnbr(argus[i]), &j);
+      new_args = chartab_to_char(new_args, my_get_nbr(argus[i]), &j);
     else if (sbs[i] == '4')
-      new_args = int_to_char(new_args, my_getnbr(argus[i]), &j);
+      new_args = int_to_char(new_args, my_get_nbr(argus[i]), &j);
     if (is_label(argus[i])) {
       inst->lbl =
-	my_strcat(my_strdup(argus[i]), my_str_cat(",", &pos));
+	my_strcat(my_strdup(argus[i]), my_char_cat(",", pos));
       new_args = chartab_to_char(new_args, 0, &j);
     }
     i++;
