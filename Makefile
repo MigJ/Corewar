@@ -5,7 +5,7 @@
 ## Login   <laspou_k@epitech.net>
 ## 
 ## Started on  Mon Mar  6 18:36:18 2017 Kévin Laspougeas
-## Last update Fri Mar 31 14:50:57 2017 Joubert Miguel
+## Last update Fri Mar 31 22:01:53 2017 Kévin Laspougeas
 ##
 
 CC		=	gcc -g3
@@ -43,28 +43,21 @@ OBJS_ASM	=	$(SRCS_ASM:.c=.o)
 
 OBJS_CORW	=	$(SRCS_CORW:.c=.o)
 
-all	:	$(ASM) #$(CORW)
+all	:	$(ASM)
 $(ASM)	:	$(OBJS_ASM)
 	make -C ./lib/my
 	if ! [ -d "./asm" ]; then 	\
 		mkdir ./asm;		\
 	fi
 	$(CC) -o $(ASM) $(OBJS_ASM) $(LDFLAGS)
-# $(CORW)	:	$(OBJS_CORW)
-# 	if ! [ -d "./corewar" ]; then	\
-# 		mkdir ./corewar;	\
-# 	fi
-# 	$(CC) -o $(CORW) $(OBJS_CORW) $(LDFLAGS)
 
 clean	:
 	make clean -C ./lib/my
 	$(RM) $(OBJS_ASM)
-#	$(RM) $(OBJS_CORW)
 
 fclean	:	clean
 	make fclean -C ./lib/my
 	$(RM) $(ASM)
-#	$(RM) $(CORW)
 
 re	:	fclean all
 

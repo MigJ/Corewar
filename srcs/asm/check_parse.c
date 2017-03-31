@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Fri Mar 31 02:02:37 2017 Kévin Laspougeas
-** Last update Fri Mar 31 17:22:14 2017 Kévin Laspougeas
+** Last update Fri Mar 31 22:10:09 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -16,7 +16,7 @@ int	get_place(t_inst *inst)
 
   while (inst->lbl[i] != SEPARATOR_CHAR)
     i++;
-  return (my_getnbr(&inst->lbl[i + 1]));
+  return ((int)(inst->lbl[i + 1] - '0'));
 }
 
 int	is_rg(char *args, int p)
@@ -45,9 +45,9 @@ char	*set_three_params(char *args, char *nme)
     (is_rg(args, 1) ? '1' : is_dr(args, 1) ? '4' : '2') : nme[0] == 10 ||
     nme[0] == 14 ? '2' : '1';
   ret[1] = nme[0] == 4 || nme[0] == 5 ? '1' : nme[0] == 6 || nme[0] == 7 ||
-    nme[0] == 8 || nme[0] == 11 ?
+    nme[0] == 8 ?
     (is_rg(args, 2) ? '1' : is_dr(args, 2) ? '4' : '2') : nme[0] == 10 ||
-    nme[0] == 14 ? '2' : '1';
+    nme[0] == 14 ? '2' : nme[0] == 11 ? '2' : '1';
   ret[2] = nme[0] == 4 || nme[0] == 5 ? '1' : nme[0] == 6 || nme[0] == 7 ||
     nme[0] == 8 ? '1' : nme[0] == 10 || nme[0] == 14 ? '1' : nme[0] == 11 ?
     (is_dr(args, 3) ? '2' : is_rg(args, 3) ? '1' : '2') : '1';
