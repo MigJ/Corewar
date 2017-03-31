@@ -5,7 +5,7 @@
 ** Login   <miguel.joubert@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 01:57:24 2017 Joubert Miguel
-** Last update Fri Mar 31 16:07:08 2017 Joubert Miguel
+** Last update Fri Mar 31 16:35:27 2017 Kévin Laspougeas
 */
 
 #include <math.h>
@@ -87,7 +87,7 @@ char			*ret_content(char *line, t_inst *inst)
   argus = my_str_sep(line, SEPARATOR_CHAR);
   j = i = 0;
   sbs = ret_size_sbs(line, inst->name);
-  inst->size = get_size_sbs(sbs, inst->name);
+  inst->size = get_size_sbs(sbs);
   while (sbs[i]) {
     pos = get_oct_pos(sbs, i);
     if (sbs[i] == '1')

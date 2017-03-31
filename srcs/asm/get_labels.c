@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar 27 16:59:52 2017 Kévin Laspougeas
-** Last update Fri Mar 31 15:42:15 2017 Kévin Laspougeas
+** Last update Fri Mar 31 16:42:41 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -49,7 +49,7 @@ void	add_label(char *line, t_list *list, int pos)
 
   i = 0;
   label = malloc(sizeof(t_inst));
-  label->size = list->size;
+  label->size = 0;
   while (line[i] != LABEL_CHAR)
     i++;
   label->name = my_strndup(line, i);
@@ -72,8 +72,11 @@ void	add_to_list(t_list *list, t_inst *to_add)
       list->last->next = to_add;
       list->last = to_add;
       }
-  if (to_add->name[0] <= 16)
+  if (to_add->name[0] <= 16) {
     list->size += to_add->size;
+    list->size += to_add->name[0] == 1 || to_add->name[0] == 9 ||
+      to_add->name[0] == 11 || to_add->name[0] == 15 ? 1 : 2;
+  }
 }
 
 int	find_label(t_list *list, char *name)

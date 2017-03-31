@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Wed Mar 29 18:16:25 2017 Kévin Laspougeas
-** Last update Fri Mar 31 15:59:28 2017 Kévin Laspougeas
+** Last update Fri Mar 31 16:35:48 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -26,7 +26,7 @@ void	place_label(t_inst *inst, int offset, t_list *list, int place)
   i = -1;
   j = 0;
   add = my_memset(2);
-  while (i < place)
+  while (i < (place - 1))
     i++;
   add = chartab_to_char(add, offset, &j);
   inst->args[i] = add[0];
@@ -34,18 +34,20 @@ void	place_label(t_inst *inst, int offset, t_list *list, int place)
   free(add);
 }
 
-void	run_label(t_inst *tmp, t_inst *tmp2, char *to_find, t_list *list)
+void	run_label(t_inst *tmp, char *to_find, t_list *list, int size)
 {
-  int	diff;
+  int		diff;
+  t_inst	*tmp2;
 
   diff = 0;
-  while (tmp2 != NULL && my_strcmp(to_find, tmp2->lbl) != 0)
+  tmp2 = list->first;
+  while (tmp2 != NULL && my_strstr(to_find, tmp2->lbl) == NULL)
     {
       diff += tmp2->size;
       tmp2 = tmp2->next;
     }
   if (tmp2 != NULL)
-    place_label(tmp, diff - tmp->size, list, get_place(tmp));
+    place_label(tmp, diff - size, list, get_place(tmp));
   else
     exit_stage_2(to_find, list, WRG_LABEL);
 }
@@ -53,18 +55,19 @@ void	run_label(t_inst *tmp, t_inst *tmp2, char *to_find, t_list *list)
 void	fill_labels(t_list *list)
 {
   t_inst	*tmp;
-  t_inst	*tmp2;
   char		*to_find;
+  int		size;
 
   tmp = list->first;
+  size = 0;
   if (tmp != NULL)
     {
       while (tmp != NULL)
 	{
+	  size += tmp->size;
 	  if ((to_find = is_there_a_label(tmp)) != NULL)
 	    {
-	      tmp2 = list->first;
-	      run_label(tmp, tmp2, to_find, list);
+	      run_label(tmp, to_find, list, size);
 	      free(to_find);
 	    }
 	  tmp = tmp->next;

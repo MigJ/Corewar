@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar  6 18:25:42 2017 Kévin Laspougeas
-** Last update Fri Mar 31 16:10:32 2017 Kévin Laspougeas
+** Last update Fri Mar 31 16:20:43 2017 Kévin Laspougeas
 */
 
 #ifndef		__ASM_H__
@@ -96,7 +96,7 @@ int		is_in_label_char(char c, char *l_char);
 int		is_label(char *str);
 char		*chartab_to_char(char *s, int nb, int *i);
 int		get_place(t_inst *inst);
-int		get_size_sbs(char *sbs, char *nme);
+int		get_size_sbs(char *sbs);
 
 /*
 **		OUTPUT TO FILE
