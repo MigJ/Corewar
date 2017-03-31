@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Fri Mar 24 14:54:14 2017 Kévin Laspougeas
-** Last update Fri Mar 31 14:56:13 2017 Kévin Laspougeas
+** Last update Fri Mar 31 17:51:00 2017 Kévin Laspougeas
 */
 
 #include <stdio.h>
@@ -54,21 +54,26 @@ int	check_ld(char *str, t_list *list, char nme)
 int	check_st(char *str, t_list *list)
 {
   int		i;
+  char		**args;
+  char		c;
   t_inst	*st;
 
   i = 0;
+  c = 3;
   st = malloc(sizeof(t_inst));
-  st->name = (char*)3;
-  if (str == NULL || my_strlen(str) < 4 || str[0] != 'r')
+  st->name = my_strdup(&c);
+  if (str == NULL)
     return (0);
-  while (str[i] != '\0' && str[i] != SEPARATOR_CHAR)
+  args = my_str_sep(str, SEPARATOR_CHAR);
+  while (args[i] != NULL) {
+    if (i == 0 && !is_reg(args[i]))
+      return (0);
+    else if (i == 1 && !is_reg(args[i]) && !is_ind(args[i]))
+      return (0);
     i++;
-  if (is_ind(&str[i + 1]) != 1 && is_reg(&str[i + 1]) != 1)
+  }
+  if (i != 2)
     return (0);
-  str[i] = '\0';
-  if (is_reg(str) != 1)
-    return (0);
-  str[i] = SEPARATOR_CHAR;
   return (fill_instruction(str, st, list));
 }
 
@@ -123,7 +128,7 @@ int	check_and(char *str, t_list *list, char nme)
       return (0);
     x++;
   }
-  if (x < 2)
+  if (x != 3)
     return (0);
   return (fill_instruction(str, and, list));
 }

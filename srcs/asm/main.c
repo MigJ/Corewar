@@ -5,9 +5,10 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Mon Mar  6 18:21:54 2017 Kévin Laspougeas
-** Last update Fri Mar 31 14:59:33 2017 Kévin Laspougeas
+** Last update Fri Mar 31 18:51:09 2017 Kévin Laspougeas
 */
 
+#include <stdio.h>
 #include "asm.h"
 
 int	check_args(char *str, t_list *list)

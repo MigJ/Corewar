@@ -5,7 +5,7 @@
 ## Login   <laspou_k@epitech.net>
 ## 
 ## Started on  Fri Oct 14 12:27:39 2016 Kévin Laspougeas
-## Last update Tue Mar 28 03:20:07 2017 Kévin Laspougeas
+## Last update Fri Mar 31 18:36:02 2017 Kévin Laspougeas
 ##
 
 CC	=	gcc
@@ -85,7 +85,7 @@ clean:
 	$(RM) $(OBJS)
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) "../$(NAME)"
 
 re: fclean all
 

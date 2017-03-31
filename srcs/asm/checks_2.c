@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar 27 23:54:16 2017 Kévin Laspougeas
-** Last update Fri Mar 31 17:55:15 2017 Joubert Miguel
+** Last update Fri Mar 31 18:41:55 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -34,6 +34,7 @@ int	check_ldi(char *str, t_list *list, char nme)
   char		**args;
   t_inst	*ldi;
 
+  x = 0;
   ldi = malloc(sizeof(t_inst));
   ldi->name = my_strdup(&nme);
   if (str == NULL)
@@ -48,7 +49,7 @@ int	check_ldi(char *str, t_list *list, char nme)
       return (0);
     x++;
   }
-  if (x < 2)
+  if (x != 3)
     return (0);
   return (fill_instruction(str, ldi, list));
 }
@@ -95,9 +96,11 @@ int	check_fork(char *str, t_list *list, char nme)
 int	check_aff(char *str, t_list *list)
 {
   t_inst	*aff;
+  char		c;
 
+  c = 16;
   aff = malloc(sizeof(t_inst));
-  aff->name = my_strdup((char*)16);
+  aff->name = my_strdup(&c);
   if (is_reg(str) != 1)
     return (0);
   return (fill_instruction(str, aff, list));

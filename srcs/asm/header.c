@@ -5,7 +5,7 @@
 ** Login   <miguel.joubert@epitech.eu>
 ** 
 ** Started on  Mon Mar 27 22:26:45 2017 Joubert Miguel
-** Last update Fri Mar 31 17:03:03 2017 Joubert Miguel
+** Last update Fri Mar 31 18:43:38 2017 Kévin Laspougeas
 */
 
 #include <stdio.h>
@@ -30,7 +30,7 @@ static header_t		write_name(const int fd_s, const int fd_cor, header_t head)
   char			*name;
 
   name = my_memset(PROG_NAME_LENGTH + 5);
-  name = get_next_line(fd_s);
+  name = rm_tab(get_next_line(fd_s));
   name = my_strdup(my_str_sep(name, '"')[1]);
   memset(head.prog_name, 0, PROG_NAME_LENGTH + 15);
   strcpy(head.prog_name, name);
@@ -50,7 +50,7 @@ static header_t		write_comment(const int fd_s, const int fd_cor, header_t head)
   char			*cmt;
 
   cmt = my_memset(COMMENT_LENGTH + 5);
-  while ((cmt = get_next_line(fd_s)))
+  while ((cmt = rm_tab(get_next_line(fd_s))))
     if (!(strncmp(".comment", cmt, 8)))
       break;
   cmt = my_strdup(my_str_sep(cmt, '"')[1]);
