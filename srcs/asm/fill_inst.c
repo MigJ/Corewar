@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Wed Mar 29 18:16:25 2017 Kévin Laspougeas
-** Last update Fri Mar 31 15:18:16 2017 Kévin Laspougeas
+** Last update Fri Mar 31 15:34:25 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -17,18 +17,21 @@ char	*is_there_a_label(t_inst *inst)
   return (NULL);
 }
 
-      void	place_label(t_inst *inst, int offset, t_list *list, int place)
+void	place_label(t_inst *inst, int offset, t_list *list, int place)
 {
   int	i;
+  int	j;
   char	*add;
   
   i = -1;
+  j = 0;
   add = my_memset(2);
   while (i < place)
     i++;
-  add = chartab_to_char(add, offset, 0);
+  add = chartab_to_char(add, offset, &j);
   inst->args[i] = add[0];
   inst->args[i + 1] = add[1];
+  free(add);
 }
 
 void	run_label(t_inst *tmp, t_inst *tmp2, char *to_find, t_list *list)
@@ -36,7 +39,7 @@ void	run_label(t_inst *tmp, t_inst *tmp2, char *to_find, t_list *list)
   int	diff;
 
   diff = 0;
-  while (tmp2 != NULL && my_strcmp(to_find, tmp2->name) != 0)
+  while (tmp2 != NULL && my_strcmp(to_find, tmp2->lbl) != 0)
     {
       diff += tmp2->size;
       tmp2 = tmp2->next;

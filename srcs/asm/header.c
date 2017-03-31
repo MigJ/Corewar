@@ -5,7 +5,7 @@
 ** Login   <miguel.joubert@epitech.eu>
 ** 
 ** Started on  Mon Mar 27 22:26:45 2017 Joubert Miguel
-** Last update Wed Mar 29 22:48:41 2017 Kévin Laspougeas
+** Last update Fri Mar 31 15:43:12 2017 Kévin Laspougeas
 */
 
 #include <stdio.h>
@@ -51,14 +51,14 @@ static header_t		write_comment(const int fd_s, const int fd_cor, header_t head)
 {
   char			*cmt;
 
-  cmt = my_memset(COMMENT_LENGTH + 1);
+  cmt = my_memset(COMMENT_LENGTH + 5);
   while ((cmt = get_next_line(fd_s)))
     if (!(strncmp(".comment", cmt, 8)))
       break;
   cmt = my_strdup(my_str_sep(cmt, '"')[1]);
   memset(head.comment, 0, COMMENT_LENGTH + 1);
   strcpy(head.comment, cmt);
-  write(fd_cor, head.comment, COMMENT_LENGTH);
+  write(fd_cor, head.comment, COMMENT_LENGTH + 4);
   return (head);
 }
 
