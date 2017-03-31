@@ -5,7 +5,7 @@
 ** Login   <miguel.joubert@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 01:57:24 2017 Joubert Miguel
-** Last update Fri Mar 31 15:34:55 2017 Joubert Miguel
+** Last update Fri Mar 31 16:07:08 2017 Joubert Miguel
 */
 
 #include <math.h>
@@ -62,12 +62,13 @@ char			get_oct_pos(char *oct, int i)
   char			sum;
 
   sum = 0;
-  while (i <= 0)
+  i--;
+  while (i >= 0)
     {
       sum += (oct[i] - 48);
-      i++;
+      i--;
     }
-  return (sum + 48);
+  return (sum + 49);
 }
 
 char			*ret_content(char *line, t_inst *inst)
@@ -78,32 +79,29 @@ char			*ret_content(char *line, t_inst *inst)
   char			pos;
   int			i;
   int			j;
-  int			k;
-
+  
   sbs = my_memset(4);
   new_args = my_memset(ret_params_size(line) + T_LAB);
   if ((argus = malloc(sizeof(char *) * 10)) == NULL)
     return (NULL);
   argus = my_str_sep(line, SEPARATOR_CHAR);
-  k = j = i = 0;
-  while (argus[k]) {
-    sbs = ret_size_sbs(argus[k], inst->name);
+  j = i = 0;
+  sbs = ret_size_sbs(line, inst->name);
+  inst->size = get_size_sbs(sbs, inst->name);
+  while (sbs[i]) {
     pos = get_oct_pos(sbs, i);
-    while (sbs[i]) {
-      if (sbs[i] == '1')
-	new_args[j++] = argus[i][1] - 48;
-      else if (sbs[i] == '2')
-	new_args = chartab_to_char(new_args, my_getnbr(argus[i]), &j);
-      else if (sbs[i] == '4')
-	new_args = int_to_char(new_args, my_getnbr(argus[i]), &j);
-      else {
-	inst->lbl =
-	  my_strcat(my_strdup(argus[i]), my_str_cat(",", &pos));
-	new_args = chartab_to_char(new_args, 0, &j);
-      }
-      i++;
+    if (sbs[i] == '1')
+      new_args[j++] = argus[i][1] - 48;
+    else if (sbs[i] == '2')
+      new_args = chartab_to_char(new_args, my_getnbr(argus[i]), &j);
+    else if (sbs[i] == '4')
+      new_args = int_to_char(new_args, my_getnbr(argus[i]), &j);
+    if (is_label(argus[i])) {
+      inst->lbl =
+	my_strcat(my_strdup(argus[i]), my_str_cat(",", &pos));
+      new_args = chartab_to_char(new_args, 0, &j);
     }
-    k++;
+    i++;
   }
   return (new_args);
 }
