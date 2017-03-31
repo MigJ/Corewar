@@ -5,12 +5,27 @@
 ** Login   <miguel.joubert@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 02:24:15 2017 Joubert Miguel
-** Last update Fri Mar 31 15:07:35 2017 Joubert Miguel
+** Last update Fri Mar 31 16:10:02 2017 Kévin Laspougeas
 */
 
 #include <string.h>
 #include <stdlib.h>
 #include "asm.h"
+
+int		get_size_sbs(char *sbs, char *nme)
+{
+  int	i;
+  int	ret;
+
+  i = ret = 0;
+  while (sbs[i] != '\0')
+    {
+      ret += sbs[i] - '0';
+      i++;
+    }
+  ret += nme[0] == 1 || nme[0] == 9 || nme[0] == 12 || nme[0] == 15 ? 1 : 2;
+  return (ret);
+}
 
 int		ret_params_size(char *line)
 {
