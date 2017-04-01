@@ -5,7 +5,7 @@
 ** Login   <miguel.joubert@epitech.eu>
 ** 
 ** Started on  Mon Mar 27 22:35:07 2017 Joubert Miguel
-** Last update Sat Apr  1 14:57:52 2017 Kévin Laspougeas
+** Last update Sat Apr  1 15:32:13 2017 Joubert Miguel
 */
 
 #include <stdlib.h>
@@ -84,11 +84,13 @@ char    **my_str_sep(char *str, char sep)
   int   j;
   int   k;
 
-  if ((arr = malloc(sizeof(char *) * 30)) == NULL)
+  if (!str)
+    return (NULL);
+  if ((arr = malloc(sizeof(char *) * 100)) == NULL)
     exit (84);
   i = j = k = 0;
-  while (i < 30)
-    arr[i++] = my_memset(40);
+  while (i < 100)
+    arr[i++] = my_memset(10000);
   i = 0;
   while (str[i])
     {

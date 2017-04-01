@@ -5,7 +5,7 @@
 ** Login   <miguel.joubert@epitech.eu>
 ** 
 ** Started on  Mon Mar 27 22:26:45 2017 Joubert Miguel
-** Last update Sat Apr  1 13:45:46 2017 Joubert Miguel
+** Last update Sat Apr  1 15:34:20 2017 Joubert Miguel
 */
 
 #include <stdio.h>
@@ -32,7 +32,8 @@ static header_t		write_name(const int fd_s, const int fd_cor, header_t head)
   name = my_memset(PROG_NAME_LENGTH + 5);
   memset(head.prog_name, 0, PROG_NAME_LENGTH + 15);
   name = rm_tab(get_next_line(fd_s));
-  if (check_header_quotes(name) >= 2) {
+  if (check_header_quotes(name) >= 2
+      && my_strlen(my_str_sep(name, '"')[1]) <= PROG_NAME_LENGTH + 1) {
     name = my_str_sep(name, '"')[1];
     strcpy(head.prog_name, name);
   }
@@ -54,9 +55,10 @@ static header_t		write_comment(const int fd_s, const int fd_cor, header_t head)
   cmt = my_memset(COMMENT_LENGTH + 5);
   memset(head.comment, 0, COMMENT_LENGTH + 6);
   while ((cmt = rm_tab(get_next_line(fd_s))))
-    if (!(strncmp(".comment", cmt, 8)))
+    if (!(strncmp(COMMENT_CMD_STRING, cmt, 8)))
       break;
-  if (check_header_quotes(cmt) >= 2) {
+  if (check_header_quotes(cmt) >= 2
+      && my_strlen(my_str_sep(cmt, '"')[1]) <= COMMENT_LENGTH + 1) {
     cmt = my_str_sep(cmt, '"')[1];
     strcpy(head.comment, cmt);
   }
