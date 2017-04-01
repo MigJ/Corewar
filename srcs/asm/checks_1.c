@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Fri Mar 24 14:54:14 2017 Kévin Laspougeas
-** Last update Sat Apr  1 00:22:36 2017 Kévin Laspougeas
+** Last update Sat Apr  1 13:28:00 2017 Joubert Miguel
 */
 
 #include "asm.h"
@@ -84,7 +84,7 @@ int	check_add_sub(char *str, t_list *list, char nme)
 
   i = 0;
   add_sub = malloc(sizeof(t_inst));
-  add_sub->name = my_strdup(&nme);
+  add_sub->name = my_char_cat("", nme);
   if (str == NULL || my_strlen(str) < 8 || str[0] != 'r')
     return (0);
   while (str[i] != '\0' && str[i] != SEPARATOR_CHAR)

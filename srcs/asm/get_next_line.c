@@ -5,7 +5,7 @@
 ** Login   <jean-baptiste.detroyes@epitech.eu@epitech.net>
 ** 
 ** Started on  Wed Dec 21 15:09:00 2016 detroy_j
-** Last update Wed Mar 29 23:51:07 2017 Kévin Laspougeas
+** Last update Sat Apr  1 01:20:14 2017 Joubert Miguel
 */
 
 #include <stdlib.h>
@@ -18,7 +18,7 @@ static char	*remalloc(char *str, size_t len)
   char	*res;
 
   i = -1;
-  res = my_memset(len + READ_SIZE + 1);
+  res = my_memset(len + READ_SIZE + 1 * 10);
   while (++i < len)
     res[i] = str[i];
   res[i] = 0;
@@ -56,7 +56,7 @@ char	*get_next_line(const int fd)
   if (fd < 0)
     return (NULL);
   i = 0;
-  line = my_memset(READ_SIZE + 1);
+  line = my_memset(READ_SIZE + 1 * 10);
   if ((ch = my_read(fd)) == -1)
     return (NULL);
   while (ch != '\n' && ch != '\0')

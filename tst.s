@@ -1,5 +1,5 @@
-.name    "enculé"
-.comment "teste de fils de p0te"
+.name    "enculé""lol"
+.comment zertyuiiytr"teste de fils de p0te"zertyjkjhgfd
 
 live:	live %1
 	zjmp %:live

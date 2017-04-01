@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Tue Mar 28 03:05:46 2017 Kévin Laspougeas
-** Last update Sat Apr  1 00:19:30 2017 Kévin Laspougeas
+** Last update Sat Apr  1 01:17:03 2017 Joubert Miguel
 */
 
 #include "asm.h"
@@ -44,7 +44,7 @@ char	*out_file(char *arg)
   out = my_memset(my_strlen(arg));
   while (arg[++i] != '\0' && i < is_s(arg))
     out[i] = arg[i];
-  out = my_strcat(out, ".cor");
+  out = my_str_cat(out, ".cor");
   return (out);
 }
 

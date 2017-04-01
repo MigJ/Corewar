@@ -5,17 +5,36 @@
 ** Login   <miguel.joubert@epitech.eu>
 ** 
 ** Started on  Mon Mar 27 22:35:07 2017 Joubert Miguel
-** Last update Sat Apr  1 01:09:17 2017 Joubert Miguel
+Last update Sat Apr  1 13:34:32 2017 Joubert Miguel
 */
 
 #include <stdlib.h>
 #include "asm.h"
+
+char    *my_strn_dup(char *src, int n)
+{
+  char  *ret;
+  int   i;
+
+  if (src != NULL)
+    {
+      i = -1;
+      ret = my_memset(n + 2 * 10);
+      while (++i < n)
+	ret[i] = src[i];
+      ret[i] = '\0';
+      return (ret);
+    }
+  return (NULL);
+}
 
 int     my_sign(char *str)
 {
   int   i;
 
   i = 0;
+  if (!str)
+    return (0);
   while (str[i] == '-')
     i++;
   return (i % 2);
@@ -27,10 +46,14 @@ int     my_get_nbr(char *str)
   int   sign;
   int   nb;
 
+  if (!str)
+    return (0);
+  if (!*str)
+    return (0);
   i = nb = sign = 0;
-  while (str[i] < '0' || str[i] > '9')
+  while ((str[i] < '0' || str[i] > '9') && str[i])
     i++;
-  while (str[i] >= '0' && str[i] <= '9')
+  while ((str[i] >= '0' && str[i] <= '9') && str[i])
     {
       nb += str[i] - 48;
       nb *= 10;
@@ -69,10 +92,6 @@ char    **my_str_sep(char *str, char sep)
   i = 0;
   while (str[i])
     {
-      /*while (str[i] == '\t') {
-	i++;
-	if (str[i] != ' ' && str[i] != '\t') arr[j][k++] = ' ';
-	}*/
       if (str[i] == sep)
 	{
 	  i++, j++;
@@ -119,10 +138,8 @@ char	*my_char_cat(char *src, char c)
   int	i;
   char	*res;
 
-  if (src == NULL)
-    return (src);
   i = -1;
-  res = my_memset(my_strlen(src) + 1);
+  res = my_memset(100);
   while (src[++i])
     res[i] = src[i];
   res[i] = c;

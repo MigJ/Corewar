@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar  6 18:25:42 2017 Kévin Laspougeas
-** Last update Sat Apr  1 00:19:04 2017 Kévin Laspougeas
+** Last update Sat Apr  1 13:34:14 2017 Joubert Miguel
 */
 
 #ifndef		__ASM_H__
@@ -44,6 +44,7 @@ typedef struct	s_list
 # define	WRG_LABEL	3
 # define	WRG_LCHARS	4
 
+int		check_header_quotes(char *str);
 int    		check_live(char *str, t_list *list);
 int		check_ld(char *str, t_list *list, char nme);
 int		check_st(char *str, t_list *list);
@@ -68,6 +69,7 @@ char		*my_str_cat(char*, char*);
 char		*my_char_cat(char *, char);
 int		my_get_nbr(char *str);
 int		my_sign(char *str);
+char		*my_strn_dup(char *, int);
 
 /*
 **		CHAINED LISTS

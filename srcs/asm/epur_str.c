@@ -5,7 +5,7 @@
 ** Login   <miguel.joubert@epitech.eu>
 ** 
 ** Started on  Wed Mar 15 13:06:25 2017 Joubert Miguel
-** Last update Fri Mar 31 15:04:39 2017 Kévin Laspougeas
+** Last update Sat Apr  1 13:14:31 2017 Joubert Miguel
 */
 
 #include "asm.h"
@@ -35,7 +35,7 @@ char		*epu(char *s)
   if (s != NULL) {
     while ((s[i] == ' ' || s[i] == '\t') && s[i] != '\0')
       i++;
-    str = my_memset(my_strlen(s) + 1 - i);
+    str = my_memset(100);
     while (s[i] != '\0')
       {
 	if (s[i] != ' ' && s[i] != '\t')

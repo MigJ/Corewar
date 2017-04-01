@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar 27 16:59:52 2017 Kévin Laspougeas
-** Last update Sat Apr  1 00:13:53 2017 Kévin Laspougeas
+** Last update Sat Apr  1 14:29:05 2017 Joubert Miguel
 */
 
 #include "asm.h"
@@ -49,10 +49,11 @@ void	add_label(char *line, t_list *list, int pos)
 
   i = 0;
   label = malloc(sizeof(t_inst));
+  label->lbl = NULL;
   label->size = 0;
   while (line[i] != LABEL_CHAR)
     i++;
-  label->name = my_strndup(line, i);
+  label->name = my_strn_dup(line, i);
   add_to_list(list, label);
 }
 
