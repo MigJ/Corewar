@@ -5,4 +5,4 @@ live:	live %1			#com
 	zjmp %:live		#COMMENT
 	add r2,r1,r3		#comm3
 	zjmp %:live	#COMME
-	ld r3,r1	#com
+	ld 3,r1	#com
