@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Fri Mar 31 02:02:37 2017 Kévin Laspougeas
-** Last update Fri Mar 31 22:10:09 2017 Kévin Laspougeas
+** Last update Sat Apr  1 14:49:50 2017 Joubert Miguel
 */
 
 #include "asm.h"
@@ -14,6 +14,7 @@ int	get_place(t_inst *inst)
 {
   int	i;
 
+  i = 0;
   while (inst->lbl[i] != SEPARATOR_CHAR)
     i++;
   return ((int)(inst->lbl[i + 1] - '0'));
