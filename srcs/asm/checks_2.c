@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar 27 23:54:16 2017 Kévin Laspougeas
-** Last update Sat Apr  1 15:35:35 2017 Kévin Laspougeas
+** Last update Sat Apr  1 18:33:23 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -18,12 +18,15 @@ int	is_label(char *str);
 int	check_zjmp(char *str, t_list *list)
 {
   t_inst	*zjmp;
+  char		**args;
   char		c;
 
   c = 9;
   zjmp = malloc(sizeof(t_inst));
   zjmp->name = my_strn_dup(&c, 1);
-  if (str == NULL || (is_dir(str) != 1 && is_label(str) != 1))
+  args = my_str_sep(str, SEPARATOR_CHAR);
+  if (str == NULL || (!is_dir(args[0]) && !is_label(args[0])) ||
+      args[1] != NULL)
     return (0);
   return (fill_instruction(str, zjmp, list));
 }
@@ -41,12 +44,13 @@ int	check_ldi(char *str, t_list *list, char nme)
     return (0);
   args = my_str_sep(str, SEPARATOR_CHAR);
   while (args[x] != NULL) {
-    if (x == 0 && !is_dir(args[x]) && !is_ind(args[x]) && !is_label(args[x]))
+    if (x == 0 && !is_reg(args[x]) && !is_dir(args[x]) && !is_ind(args[x]) &&
+	!is_label(args[x]))
       return (0);
-    else if (x == 1 && !is_dir(args[x]) && !is_ind(args[x]) &&
+    else if (x == 1 && !is_dir(args[x]) && !is_reg(args[x]) &&
 	     !is_label(args[x]))
       return (0);
-    else if (x == 2 && !is_reg(args[x]))
+    else if (x == 2 && !is_reg(args[x]) && !is_dir(args[x]))
       return (0);
     x++;
   }
@@ -74,7 +78,7 @@ int	check_sti(char *str, t_list *list, char nme)
 	     !is_label(args[x]) && !is_ind(args[x]))
       return (0);
     else if (x == 2 && !is_reg(args[x]) && !is_dir(args[x]) &&
-	     !is_label(args[x]) && !is_ind(args[x]))
+	     !is_label(args[x]))
       return (0);
     x++;
   }
@@ -91,7 +95,8 @@ int	check_fork(char *str, t_list *list, char nme)
   fork = malloc(sizeof(t_inst));
   fork->name = my_strn_dup(&nme, 1);
   args = my_str_sep(str, SEPARATOR_CHAR);
-  if (args[0] == NULL || (is_dir(args[0]) != 1 && args[1] != NULL))
+  if (args[0] == NULL || (!is_dir(args[0]) && !is_label(args[0])) ||
+      args[1] != NULL)
     return (0);
   return (fill_instruction(str, fork, list));
 }
