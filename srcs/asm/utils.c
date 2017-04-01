@@ -5,7 +5,7 @@
 ** Login   <miguel.joubert@epitech.eu>
 ** 
 ** Started on  Mon Mar 27 22:35:07 2017 Joubert Miguel
-Last update Sat Apr  1 13:34:32 2017 Joubert Miguel
+** Last update Sat Apr  1 14:57:52 2017 Kévin Laspougeas
 */
 
 #include <stdlib.h>
@@ -92,6 +92,8 @@ char    **my_str_sep(char *str, char sep)
   i = 0;
   while (str[i])
     {
+      if (str[i] == COMMENT_CHAR)
+	break;
       if (str[i] == sep)
 	{
 	  i++, j++;

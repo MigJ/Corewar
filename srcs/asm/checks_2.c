@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar 27 23:54:16 2017 Kévin Laspougeas
-** Last update Fri Mar 31 18:41:55 2017 Kévin Laspougeas
+** Last update Sat Apr  1 00:36:39 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -49,7 +49,7 @@ int	check_ldi(char *str, t_list *list, char nme)
       return (0);
     x++;
   }
-  if (x != 3)
+  if (x != 3 || (x > 3 && args[4][0] == COMMENT_CHAR))
     return (0);
   return (fill_instruction(str, ldi, list));
 }
@@ -77,7 +77,7 @@ int	check_sti(char *str, t_list *list, char nme)
       return (0);
     x++;
   }
-  if (x != 3)
+  if (x != 3 || (x > 3 && args[4][0] == COMMENT_CHAR))
     return (0);
   return (fill_instruction(str, sti, list));
 }

@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Fri Mar 24 14:54:14 2017 Kévin Laspougeas
-** Last update Sat Apr  1 13:28:00 2017 Joubert Miguel
+** Last update Sat Apr  1 14:58:06 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -19,11 +19,13 @@ int	check_live(char *str, t_list *list)
 {
   char		c;
   t_inst	*live;
+  char		**args;
 
   c = 1;
+  args = my_str_sep(str, SEPARATOR_CHAR);
   live = malloc(sizeof(t_inst));
   live->name = my_strdup(&c);
-  if (is_dir(str) != 1 || my_getnbr(&str[1]) < 0)
+  if (is_dir(args[0]) != 1 || my_getnbr(&args[0][1]) < 0 || args[1] != NULL)
     return (0);
   return (fill_instruction(str, live, list));
 }
