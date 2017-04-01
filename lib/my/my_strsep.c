@@ -1,11 +1,11 @@
 /*
-1** my_strsep.c for mylib in /home/laspou_k/delivery/CPE/CPE_2016_corewar
+** my_strsep.c for mylib in /home/laspou_k/delivery/CPE/CPE_2016_corewar
 ** 
 ** Made by Kévin Laspougeas
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Tue Mar 28 03:08:57 2017 Kévin Laspougeas
-** Last update Wed Mar 29 23:37:33 2017 Kévin Laspougeas
+** Last update Sat Apr  1 17:15:39 2017 Kévin Laspougeas
 */
 
 #include "my.h"

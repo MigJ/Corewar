@@ -5,11 +5,10 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Thu Oct  6 13:58:26 2016 Kévin Laspougeas
-** Last update Fri Mar 31 23:24:13 2017 Kévin Laspougeas
+** Last update Sat Apr  1 17:15:26 2017 Kévin Laspougeas
 */
 
 #include "my.h"
-
 
 int	count_str(char *str)
 {
@@ -95,22 +94,3 @@ int	my_getnbr(char *str)
     }
   return (nbr);
 }
-
-
-
-/* int	my_getnbr(char *str) */
-/* { */
-/*   int	res; */
-/*   int	mul; */
-/*   int	i; */
-
-/*   res = i = 0; */
-/*   mul = 1; */
-/*   while (str[i] != '\0' && (str[i] < '0' || str[i] > '9')) { */
-/*     mul *= str[i++] == '+' ? 1 : str[i] == '-' ? -1 : 1; */
-/*   } */
-/*   while (str[i] != '\0' && str[i] >= '0' && str[i++] <= '9') { */
-/*     mul *= 10; */
-/*   } */
-  
-/* } */

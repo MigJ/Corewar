@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Fri Mar 24 14:54:14 2017 Kévin Laspougeas
-** Last update Sat Apr  1 15:18:20 2017 Kévin Laspougeas
+** Last update Sat Apr  1 15:31:38 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -43,7 +43,7 @@ int	check_ld(char *str, t_list *list, char nme)
   if (str == NULL)
     return (0);
   while (args[i] != NULL) {
-    if (i == 0 && !is_ind(args[i]) && !is_dir(args[i]))
+    if (i == 0 && !is_ind(args[i]) && !is_dir(args[i]) && !is_label(args[i]))
       return (0);
     else if (i == 1 && !is_reg(args[i]))
       return (0);
@@ -71,7 +71,8 @@ int	check_st(char *str, t_list *list)
   while (args[i] != NULL) {
     if (i == 0 && !is_reg(args[i]))
       return (0);
-    else if (i == 1 && !is_reg(args[i]) && !is_ind(args[i]))
+    else if (i == 1 && !is_reg(args[i]) && !is_ind(args[i]) &&
+	     !is_label(args[i]))
       return (0);
     i++;
   }

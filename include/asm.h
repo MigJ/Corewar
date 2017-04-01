@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar  6 18:25:42 2017 Kévin Laspougeas
-** Last update Sat Apr  1 13:34:14 2017 Joubert Miguel
+** Last update Sat Apr  1 16:56:29 2017 Kévin Laspougeas
 */
 
 #ifndef		__ASM_H__
@@ -110,7 +110,7 @@ int		get_size_sbs(char *sbs);
 
 void		create_header(const int fd, const int fd_out, header_t *head);
 void		write_inst(t_inst *inst, const int fd_out);
-void		write_it_all(t_list *list, const int fd_out);
+void		write_it_all(t_list *list, const int fd_out, const int fd);
 char		*out_file(char *arg);
 
 /*

@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar 27 23:54:16 2017 Kévin Laspougeas
-** Last update Sat Apr  1 15:18:55 2017 Kévin Laspougeas
+** Last update Sat Apr  1 15:35:35 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -41,9 +41,10 @@ int	check_ldi(char *str, t_list *list, char nme)
     return (0);
   args = my_str_sep(str, SEPARATOR_CHAR);
   while (args[x] != NULL) {
-    if (x == 0 && !is_dir(args[x]) && !is_ind(args[x]))
+    if (x == 0 && !is_dir(args[x]) && !is_ind(args[x]) && !is_label(args[x]))
       return (0);
-    else if (x == 1 && !is_dir(args[x]) && !is_ind(args[x]))
+    else if (x == 1 && !is_dir(args[x]) && !is_ind(args[x]) &&
+	     !is_label(args[x]))
       return (0);
     else if (x == 2 && !is_reg(args[x]))
       return (0);
@@ -85,10 +86,12 @@ int	check_sti(char *str, t_list *list, char nme)
 int	check_fork(char *str, t_list *list, char nme)
 {
   t_inst	*fork;
+  char		**args;
 
   fork = malloc(sizeof(t_inst));
   fork->name = my_strn_dup(&nme, 1);
-  if (is_dir(str) != 1)
+  args = my_str_sep(str, SEPARATOR_CHAR);
+  if (args[0] == NULL || (is_dir(args[0]) != 1 && args[1] != NULL))
     return (0);
   return (fill_instruction(str, fork, list));
 }
@@ -97,11 +100,13 @@ int	check_aff(char *str, t_list *list)
 {
   t_inst	*aff;
   char		c;
+  char		**args;
 
   c = 16;
   aff = malloc(sizeof(t_inst));
   aff->name = my_strn_dup(&c, 1);
-  if (is_reg(str) != 1)
+  args = my_str_sep(str, SEPARATOR_CHAR);
+  if (args[0] == NULL || (is_reg(args[0]) != 1 && args[1] != NULL))
     return (0);
   return (fill_instruction(str, aff, list));
 }

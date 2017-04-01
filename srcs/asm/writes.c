@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Wed Mar 29 13:59:47 2017 Kévin Laspougeas
-** Last update Fri Mar 31 17:18:24 2017 Kévin Laspougeas
+** Last update Sat Apr  1 16:57:25 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -29,10 +29,13 @@ void	write_size_head(const int fd_out, t_list *list)
   write(fd_out, &list->size, sizeof(int));
 }
 
-void	write_it_all(t_list *list, const int fd_out)
+void	write_it_all(t_list *list, const int fd_out, const int fd)
 {
   t_inst	*tmp;
+  header_t	head;
 
+  lseek(fd, SEEK_SET, 0);
+  create_header(fd, fd_out, &head);
   tmp = list->first;
   while (tmp != NULL)
     {

@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Fri Mar 31 02:02:37 2017 Kévin Laspougeas
-** Last update Sat Apr  1 14:49:50 2017 Joubert Miguel
+** Last update Sat Apr  1 17:00:30 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -69,7 +69,7 @@ char	*ret_size_sbs(char *args, char *nme)
 	    nme[0] == 15 ? "2" : "1");
   else if (nme[0] == 2 || nme[0] == 3 || nme[0] == 13) {
     ret[0] = nme[0] == 2 || nme[0] == 13 ?
-      (is_dr(args, 1) ? '2' : is_rg(args, 1) ? '1' : '2') : '1';
+      (is_dr(args, 1) ? '2' : is_rg(args, 1) ? '1' : '4') : '1';
     ret[1] = nme[0] == 3 ? (is_rg(args, 2) ? '1' : '2') : '1';
     ret[2] = '\0';
   }

@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Wed Mar 29 18:16:25 2017 Kévin Laspougeas
-** Last update Sat Apr  1 14:26:53 2017 Joubert Miguel
+** Last update Sat Apr  1 17:19:06 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -22,15 +22,23 @@ void	place_label(t_inst *inst, int offset, t_list *list, int place)
   int	i;
   int	j;
   char	*add;
-  
+
   i = -1;
   j = 0;
   add = my_memset(2);
   while (i < (place - 1))
     i++;
   add = chartab_to_char(add, offset, &j);
-  inst->args[i] = add[0];
-  inst->args[i + 1] = add[1];
+  if (inst->name[0] == 2) {
+    inst->args[i] = -1;
+    inst->args[i + 1] = -1;
+    inst->args[i + 2] = add[0];
+    inst->args[i + 3] = add[1];
+  }
+  else {
+    inst->args[i] = add[0];
+    inst->args[i + 1] = add[1];
+  }
   free(add);
 }
 
