@@ -5,17 +5,10 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Wed Mar 29 18:16:25 2017 Kévin Laspougeas
-** Last update Sat Apr  1 17:19:06 2017 Kévin Laspougeas
+** Last update Sat Apr  1 17:51:56 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
-
-char	*is_there_a_label(t_inst *inst)
-{
-  if (inst->lbl != NULL)
-    return (inst->lbl);
-  return (NULL);
-}
 
 void	place_label(t_inst *inst, int offset, t_list *list, int place)
 {
@@ -55,7 +48,7 @@ void	run_label(t_inst *tmp, char *to_find, t_list *list, int size)
       tmp2 = tmp2->next;
     }
   if (tmp2 != NULL && is_in_twice(to_find, list) == 0)
-    place_label(tmp, diff - size, list, get_place(tmp));
+    place_label(tmp, diff - size, list, get_place(tmp, to_find));
   else
     exit_stage_2(to_find, list, WRG_LABEL);
 }
@@ -72,7 +65,12 @@ void	fill_labels(t_list *list)
     {
       while (tmp != NULL)
 	{
-	  if ((to_find = is_there_a_label(tmp)) != NULL)
+	  if (tmp->lbl && tmp->lbl[0] && (to_find = my_strdup(tmp->lbl[0])))
+	    {
+	      run_label(tmp, to_find, list, size);
+	      free(to_find);
+	    }
+	  if (tmp->lbl && tmp->lbl[1] && (to_find = my_strdup(tmp->lbl[1])))
 	    {
 	      run_label(tmp, to_find, list, size);
 	      free(to_find);

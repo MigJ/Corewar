@@ -5,7 +5,7 @@
 ** Login   <miguel.joubert@epitech.eu>
 ** 
 ** Started on  Tue Mar 28 01:57:24 2017 Joubert Miguel
-** Last update Sat Apr  1 14:29:37 2017 Joubert Miguel
+** Last update Sat Apr  1 17:55:00 2017 Kévin Laspougeas
 */
 
 #include <math.h>
@@ -82,14 +82,17 @@ char			*ret_content(char *line, t_inst *inst)
   char			pos;
   int			i;
   int			j;
+  int			l;
 
-  inst->lbl = NULL;
+  inst->lbl = malloc(sizeof(char*) * 3);
+  inst->lbl[0] = NULL;
+  inst->lbl[1] = NULL;
   sbs = my_memset(4);
   new_args = my_memset(ret_params_size(line) + T_LAB);
   if ((argus = malloc(sizeof(char *) * 10)) == NULL)
     return (NULL);
   argus = my_str_sep(line, SEPARATOR_CHAR);
-  j = i = 0;
+  j = i = l = 0;
   sbs = ret_size_sbs(line, inst->name);
   inst->size = get_size_sbs(sbs);
   while (sbs[i]) {
@@ -101,7 +104,7 @@ char			*ret_content(char *line, t_inst *inst)
     else if (sbs[i] == '4')
       new_args = int_to_char(new_args, my_get_nbr(argus[i]), &j);
     if (is_label(argus[i])) {
-      inst->lbl =
+      inst->lbl[l++] =
 	my_str_cat(argus[i], my_char_cat(",", pos));
     }
     i++;

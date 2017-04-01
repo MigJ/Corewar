@@ -5,19 +5,22 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Fri Mar 31 02:02:37 2017 Kévin Laspougeas
-** Last update Sat Apr  1 17:00:30 2017 Kévin Laspougeas
+** Last update Sat Apr  1 17:45:22 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
 
-int	get_place(t_inst *inst)
+int	get_place(t_inst *inst, char *lbl)
 {
   int	i;
+  int	x;
 
-  i = 0;
-  while (inst->lbl[i] != SEPARATOR_CHAR)
+  i = x = 0;
+  while (my_strstr(inst->lbl[x], lbl) == NULL)
+    x++;
+  while (inst->lbl[x][i] != SEPARATOR_CHAR)
     i++;
-  return ((int)(inst->lbl[i + 1] - '0'));
+  return ((int)(inst->lbl[x][i + 1] - '0'));
 }
 
 int	is_rg(char *args, int p)

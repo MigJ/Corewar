@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar  6 18:25:42 2017 Kévin Laspougeas
-** Last update Sat Apr  1 16:56:29 2017 Kévin Laspougeas
+** Last update Sat Apr  1 17:45:40 2017 Kévin Laspougeas
 */
 
 #ifndef		__ASM_H__
@@ -22,7 +22,7 @@ typedef struct	s_instruct
   char			*name;
   unsigned char		c_byte;
   int			size;
-  char			*lbl;
+  char			**lbl;
   char			*args;
   struct s_instruct	*next;
   struct s_instruct	*prev;
@@ -101,7 +101,7 @@ char		*int_to_char(char *hex, int nb, int *j);
 int		is_in_label_char(char c, char *l_char);
 int		is_label(char *str);
 char		*chartab_to_char(char *s, int nb, int *i);
-int		get_place(t_inst *inst);
+int		get_place(t_inst *inst, char *lbl);
 int		get_size_sbs(char *sbs);
 
 /*
