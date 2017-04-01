@@ -5,25 +5,18 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Tue Mar 28 17:37:12 2017 Kévin Laspougeas
-** Last update Thu Mar 30 01:19:48 2017 Kévin Laspougeas
+** Last update Sat Apr  1 15:21:21 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
 
 void	free_list(t_list *list)
 {
-  /* t_inst	*tmp; */
+  t_inst	*tmp;
 
-  /* while (list->first != NULL) */
-  /*   { */
-  /*     tmp = list->first; */
-  /*     free(tmp->name); */
-  /*     free(tmp->args); */
-  /*     list->first = tmp->next; */
-  /*     free(tmp); */
-  /*   } */
-  int	i;
-
-  i = 0;
-  i++;
+  while (list->first != NULL) {
+    tmp = list->first;
+    list->first = list->first->next;
+    free(tmp);
+  }
 }

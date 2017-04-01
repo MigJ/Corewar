@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Fri Mar 24 14:54:14 2017 Kévin Laspougeas
-** Last update Sat Apr  1 14:58:06 2017 Kévin Laspougeas
+** Last update Sat Apr  1 15:18:20 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -24,7 +24,7 @@ int	check_live(char *str, t_list *list)
   c = 1;
   args = my_str_sep(str, SEPARATOR_CHAR);
   live = malloc(sizeof(t_inst));
-  live->name = my_strdup(&c);
+  live->name = my_strn_dup(&c, 1);
   if (is_dir(args[0]) != 1 || my_getnbr(&args[0][1]) < 0 || args[1] != NULL)
     return (0);
   return (fill_instruction(str, live, list));
@@ -34,21 +34,23 @@ int	check_ld(char *str, t_list *list, char nme)
 {
   int		i;
   t_inst	*ld;
+  char		**args;
 
   i = 0;
   ld = malloc(sizeof(t_inst));
-  ld->name = my_strdup(&nme);
+  args = my_str_sep(str, SEPARATOR_CHAR);
+  ld->name = my_strn_dup(&nme, 1);
   if (str == NULL)
     return (0);
-  while (str[i] != '\0' && str[i] != SEPARATOR_CHAR)
+  while (args[i] != NULL) {
+    if (i == 0 && !is_ind(args[i]) && !is_dir(args[i]))
+      return (0);
+    else if (i == 1 && !is_reg(args[i]))
+      return (0);
     i++;
-  if (str[i] == '\0' || is_reg(&str[i + 1]) != 1)
+  }
+  if (i != 2)
     return (0);
-  str[i] = '\0';
-  if (is_dir(str) != 1 && is_reg(str) != 1 && is_ind(str) != 1 &&
-      is_label(str) != 1)
-    return (0);
-  str[i] = SEPARATOR_CHAR;
   return (fill_instruction(str, ld, list));
 }
 
@@ -62,7 +64,7 @@ int	check_st(char *str, t_list *list)
   i = 0;
   c = 3;
   st = malloc(sizeof(t_inst));
-  st->name = my_strdup(&c);
+  st->name = my_strn_dup(&c, 1);
   if (str == NULL)
     return (0);
   args = my_str_sep(str, SEPARATOR_CHAR);
@@ -81,28 +83,22 @@ int	check_st(char *str, t_list *list)
 int	check_add_sub(char *str, t_list *list, char nme)
 {
   int		i;
-  int		y;
+  char		**args;
   t_inst	*add_sub;
 
   i = 0;
   add_sub = malloc(sizeof(t_inst));
   add_sub->name = my_char_cat("", nme);
-  if (str == NULL || my_strlen(str) < 8 || str[0] != 'r')
+  args = my_str_sep(str, SEPARATOR_CHAR);
+  if (str == NULL)
     return (0);
-  while (str[i] != '\0' && str[i] != SEPARATOR_CHAR)
+  while (args[i] != NULL) {
+    if (!is_reg(args[i]))
+      return (0);
     i++;
-  y = str[i] != '\0' ? i : 0;
-  while (str[i] != '\0' && str[i] != SEPARATOR_CHAR)
-    i++;
-  if (is_reg(&str[i + 1]) != 1)
+  }
+  if (i != 3)
     return (0);
-  str[i] = '\0';
-  if (is_reg(&str[y + 1]) != 1)
-    return (0);
-  str[y] = '\0';
-  if (is_reg(str) != 1)
-    return (0);
-  str[i] = str[y] = SEPARATOR_CHAR;
   return (fill_instruction(str, add_sub, list));
 }
 
@@ -114,7 +110,7 @@ int	check_and(char *str, t_list *list, char nme)
 
   x = 0;
   and = malloc(sizeof(t_inst));
-  and->name = my_strdup(&nme);
+  and->name = my_strn_dup(&nme, 1);
   if (str == NULL)
     return (0);
   args = my_str_sep(str, SEPARATOR_CHAR);

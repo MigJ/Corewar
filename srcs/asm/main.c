@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Mon Mar  6 18:21:54 2017 Kévin Laspougeas
-** Last update Sat Apr  1 14:49:14 2017 Kévin Laspougeas
+** Last update Sat Apr  1 15:20:19 2017 Kévin Laspougeas
 */
 
 #include <stdio.h>
@@ -103,6 +103,7 @@ int	main(int ac, char **av)
       check_code(fd, fd_out, list);
       fill_labels(list);
       write_it_all(list, fd_out);
+      free_list(list);
       close(fd);
       close(fd_out);
       return (0);

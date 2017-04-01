@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar 27 23:54:16 2017 Kévin Laspougeas
-** Last update Sat Apr  1 00:36:39 2017 Kévin Laspougeas
+** Last update Sat Apr  1 15:18:55 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -22,7 +22,7 @@ int	check_zjmp(char *str, t_list *list)
 
   c = 9;
   zjmp = malloc(sizeof(t_inst));
-  zjmp->name = my_strdup(&c);
+  zjmp->name = my_strn_dup(&c, 1);
   if (str == NULL || (is_dir(str) != 1 && is_label(str) != 1))
     return (0);
   return (fill_instruction(str, zjmp, list));
@@ -36,7 +36,7 @@ int	check_ldi(char *str, t_list *list, char nme)
 
   x = 0;
   ldi = malloc(sizeof(t_inst));
-  ldi->name = my_strdup(&nme);
+  ldi->name = my_strn_dup(&nme, 1);
   if (str == NULL)
     return (0);
   args = my_str_sep(str, SEPARATOR_CHAR);
@@ -49,7 +49,7 @@ int	check_ldi(char *str, t_list *list, char nme)
       return (0);
     x++;
   }
-  if (x != 3 || (x > 3 && args[4][0] == COMMENT_CHAR))
+  if (x != 3)
     return (0);
   return (fill_instruction(str, ldi, list));
 }
@@ -62,7 +62,7 @@ int	check_sti(char *str, t_list *list, char nme)
 
   x = 0;
   sti = malloc(sizeof(*sti));
-  sti->name = my_strdup(&nme);
+  sti->name = my_strn_dup(&nme, 1);
   if (str == NULL)
     return (0);
   args = my_str_sep(str, SEPARATOR_CHAR);
@@ -77,7 +77,7 @@ int	check_sti(char *str, t_list *list, char nme)
       return (0);
     x++;
   }
-  if (x != 3 || (x > 3 && args[4][0] == COMMENT_CHAR))
+  if (x != 3)
     return (0);
   return (fill_instruction(str, sti, list));
 }
@@ -87,7 +87,7 @@ int	check_fork(char *str, t_list *list, char nme)
   t_inst	*fork;
 
   fork = malloc(sizeof(t_inst));
-  fork->name = my_strdup(&nme);
+  fork->name = my_strn_dup(&nme, 1);
   if (is_dir(str) != 1)
     return (0);
   return (fill_instruction(str, fork, list));
@@ -100,7 +100,7 @@ int	check_aff(char *str, t_list *list)
 
   c = 16;
   aff = malloc(sizeof(t_inst));
-  aff->name = my_strdup(&c);
+  aff->name = my_strn_dup(&c, 1);
   if (is_reg(str) != 1)
     return (0);
   return (fill_instruction(str, aff, list));
