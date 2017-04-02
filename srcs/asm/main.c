@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Mon Mar  6 18:21:54 2017 Kévin Laspougeas
-** Last update Sun Apr  2 22:03:42 2017 Joubert Miguel
+** Last update Sun Apr  2 22:17:09 2017 Joubert Miguel
 */
 
 #include <stdio.h>
@@ -59,11 +59,10 @@ void	check_code(const int fd, t_list *list)
   lines = 0;
   while ((line = rm_tab(get_next_line(fd))) != NULL && ++lines) {
     if (my_strncmp(line, ".", 1)) {
-      if ((r = line_is_label(line, list)) >= 1 && line[0] != COMMENT_CHAR)
-	{
-	  add_label(line, list, lines);
-	  line = &line[r + 2];
-	}
+      if ((r = line_is_label(line, list)) >= 1 && line[0] != COMMENT_CHAR) {
+	add_label(line, list, lines);
+	line = &line[r + 2];
+      }
       if (line[0] != '\0' && line[0] != COMMENT_CHAR &&
 	  line[my_strlen(line) - 1] != LABEL_CHAR &&
 	  my_strncmp(line, NAME_CMD_STRING, my_strlen(NAME_CMD_STRING)) &&
