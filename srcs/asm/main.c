@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Mon Mar  6 18:21:54 2017 Kévin Laspougeas
-** Last update Sun Apr  2 19:39:52 2017 Joubert Miguel
+** Last update Sun Apr  2 22:03:42 2017 Joubert Miguel
 */
 
 #include <stdio.h>
@@ -54,9 +54,10 @@ void	check_code(const int fd, t_list *list)
   char		*line;
   int		lines;
   int		r;
+  int		count;
 
-  lines = 1;
-  while ((line = rm_tab(get_next_line(fd))) != NULL) {
+  lines = 0;
+  while ((line = rm_tab(get_next_line(fd))) != NULL && ++lines) {
     if (my_strncmp(line, ".", 1)) {
       if ((r = line_is_label(line, list)) >= 1 && line[0] != COMMENT_CHAR)
 	{
@@ -73,9 +74,9 @@ void	check_code(const int fd, t_list *list)
 	    exit_error(line, lines, WRG_PAR) : (void)0;
 	}
     }
-    else check_header(line, lines);
-    lines++;
+    else count = check_header(line, lines);
   }
+  if (count != 2) exit_error(line, lines, WRG_PAR);
 }
 
 void	usage(char *av)

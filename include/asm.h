@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar  6 18:25:42 2017 Kévin Laspougeas
-** Last update Sun Apr  2 19:43:15 2017 Joubert Miguel
+** Last update Sun Apr  2 22:03:57 2017 Joubert Miguel
 */
 
 #ifndef		__ASM_H__
@@ -55,7 +55,7 @@ typedef struct	s_list
 # define	WRG_LABEL	3
 # define	WRG_LCHARS	4
 
-void            check_header(char *line, int lines);
+int             check_header(char *line, int lines);
 int		check_header_quotes(char *str);
 int    		check_live(char *str, t_list *list);
 int		check_ld(char *str, t_list *list, char nme);
