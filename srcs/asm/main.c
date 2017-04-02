@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Mon Mar  6 18:21:54 2017 Kévin Laspougeas
-** Last update Sat Apr  1 16:56:58 2017 Kévin Laspougeas
+** Last update Sun Apr  2 19:39:52 2017 Joubert Miguel
 */
 
 #include <stdio.h>
@@ -57,24 +57,25 @@ void	check_code(const int fd, t_list *list)
 
   lines = 1;
   while ((line = rm_tab(get_next_line(fd))) != NULL) {
-      if (my_strncmp(line, ".", 1)) {
-	  if ((r = line_is_label(line, list)) >= 1 && line[0] != COMMENT_CHAR)
-	    {
-	      add_label(line, list, lines);
-	      line = &line[r + 2];
-	    }
-	  if (line[0] != '\0' && line[0] != COMMENT_CHAR &&
-	      line[my_strlen(line) - 1] != LABEL_CHAR &&
-	      my_strncmp(line, NAME_CMD_STRING, my_strlen(NAME_CMD_STRING)) &&
-	      my_strncmp(line, COMMENT_CMD_STRING, my_strlen(NAME_CMD_STRING)))
-	    {
-	      check_mnemo(line, lines);
-	      !check_args(line, list) ?
-		exit_error(line, lines, WRG_PAR) : (void)0;
-	    }
+    if (my_strncmp(line, ".", 1)) {
+      if ((r = line_is_label(line, list)) >= 1 && line[0] != COMMENT_CHAR)
+	{
+	  add_label(line, list, lines);
+	  line = &line[r + 2];
 	}
-      lines++;
+      if (line[0] != '\0' && line[0] != COMMENT_CHAR &&
+	  line[my_strlen(line) - 1] != LABEL_CHAR &&
+	  my_strncmp(line, NAME_CMD_STRING, my_strlen(NAME_CMD_STRING)) &&
+	  my_strncmp(line, COMMENT_CMD_STRING, my_strlen(NAME_CMD_STRING)))
+	{
+	  check_mnemo(line, lines);
+	  !check_args(line, list) ?
+	    exit_error(line, lines, WRG_PAR) : (void)0;
+	}
     }
+    else check_header(line, lines);
+    lines++;
+  }
 }
 
 void	usage(char *av)
