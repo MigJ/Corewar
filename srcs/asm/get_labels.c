@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar 27 16:59:52 2017 Kévin Laspougeas
-** Last update Sat Apr  1 14:29:05 2017 Joubert Miguel
+** Last update Sun Apr  2 17:31:50 2017 Joubert Miguel
 */
 
 #include "asm.h"
@@ -14,7 +14,8 @@ t_list	*make_list()
 {
   t_list	*list;
 
-  list = malloc(sizeof(t_list));
+  if ((list = malloc(sizeof(t_list))) == NULL)
+    return (NULL);
   list->first = NULL;
   list->last = NULL;
   list->size = 0;
@@ -48,12 +49,13 @@ void	add_label(char *line, t_list *list, int pos)
   t_inst	*label;
 
   i = 0;
-  label = malloc(sizeof(t_inst));
+  if ((label = malloc(sizeof(t_inst))) == NULL)
+    return;
   label->lbl = NULL;
   label->size = 0;
   while (line[i] != LABEL_CHAR)
     i++;
-  label->name = my_strn_dup(line, i);
+  label->name = my_strndup(line, i);
   add_to_list(list, label);
 }
 

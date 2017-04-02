@@ -5,12 +5,12 @@
 ** Login   <astek@epitech.net>
 **
 ** Started on  Mon Mar 30 11:14:31 2009 Astek
-** Last update Mon Mar 27 23:17:25 2017 Joubert Miguel
+** Last update Sun Apr  2 16:57:22 2017 Joubert Miguel
 */
 
 #include "../include/op.h"
 
-op_t    op_tab[] =
+op_t	op_tab[] =
   {
     {"live", 1, {T_DIR}, 1, 10, "alive"},
     {"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load"},

@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar 27 23:54:16 2017 Kévin Laspougeas
-** Last update Sun Apr  2 16:41:11 2017 Kévin Laspougeas
+** Last update Sun Apr  2 17:30:59 2017 Joubert Miguel
 */
 
 #include "asm.h"
@@ -22,8 +22,9 @@ int	check_zjmp(char *str, t_list *list)
   char		c;
 
   c = 9;
-  zjmp = malloc(sizeof(t_inst));
-  zjmp->name = my_strn_dup(&c, 1);
+  if ((zjmp = malloc(sizeof(t_inst))) == NULL)
+    return (84);
+  zjmp->name = my_strndup(&c, 1);
   args = my_str_sep(str, SEPARATOR_CHAR);
   if (str == NULL || (!is_dir(args[0]) && !is_label(args[0])) ||
       args[1] != NULL)
@@ -38,8 +39,9 @@ int	check_ldi(char *str, t_list *list, char nme)
   t_inst	*ldi;
 
   x = 0;
-  ldi = malloc(sizeof(t_inst));
-  ldi->name = my_strn_dup(&nme, 1);
+  if ((ldi = malloc(sizeof(t_inst))) == NULL)
+    return (84);
+  ldi->name = my_strndup(&nme, 1);
   if (str == NULL)
     return (0);
   args = my_str_sep(str, SEPARATOR_CHAR);
@@ -66,8 +68,9 @@ int	check_sti(char *str, t_list *list, char nme)
   t_inst	*sti;
 
   x = 0;
-  sti = malloc(sizeof(*sti));
-  sti->name = my_strn_dup(&nme, 1);
+  if ((sti = malloc(sizeof(*sti))) == NULL)
+    return (84);
+  sti->name = my_strndup(&nme, 1);
   if (str == NULL)
     return (0);
   args = my_str_sep(str, SEPARATOR_CHAR);
@@ -92,8 +95,9 @@ int	check_fork(char *str, t_list *list, char nme)
   t_inst	*fork;
   char		**args;
 
-  fork = malloc(sizeof(t_inst));
-  fork->name = my_strn_dup(&nme, 1);
+  if ((fork = malloc(sizeof(t_inst))) == NULL)
+    return (84);
+  fork->name = my_strndup(&nme, 1);
   args = my_str_sep(str, SEPARATOR_CHAR);
   if (args[0] == NULL || (!is_dir(args[0]) && !is_label(args[0])) ||
       args[1] != NULL)
@@ -108,8 +112,9 @@ int	check_aff(char *str, t_list *list)
   char		**args;
 
   c = 16;
-  aff = malloc(sizeof(t_inst));
-  aff->name = my_strn_dup(&c, 1);
+  if ((aff = malloc(sizeof(t_inst))) == NULL)
+    return (84);
+  aff->name = my_strndup(&c, 1);
   args = my_str_sep(str, SEPARATOR_CHAR);
   if (args[0] == NULL || (is_reg(args[0]) != 1 && args[1] != NULL))
     return (0);

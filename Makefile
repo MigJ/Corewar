@@ -5,7 +5,7 @@
 ## Login   <laspou_k@epitech.net>
 ## 
 ## Started on  Mon Mar  6 18:36:18 2017 Kévin Laspougeas
-## Last update Sat Apr  1 15:38:19 2017 Kévin Laspougeas
+## Last update Sun Apr  2 17:17:45 2017 Joubert Miguel
 ##
 
 CC		=	gcc -g3
@@ -28,6 +28,8 @@ SRCS_ASM	=	./srcs/asm/main.c		\
 			./srcs/asm/check_parse.c	\
 			./srcs/asm/check_args.c		\
 			./srcs/asm/check_header.c	\
+			./srcs/asm/content.c		\
+			./srcs/asm/init_content.c	\
 			./srcs/asm/get_size.c		\
 			./srcs/asm/errors.c		\
 			./srcs/asm/get_labels.c		\

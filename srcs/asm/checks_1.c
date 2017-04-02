@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Fri Mar 24 14:54:14 2017 Kévin Laspougeas
-** Last update Sat Apr  1 15:31:38 2017 Kévin Laspougeas
+** Last update Sun Apr  2 17:27:55 2017 Joubert Miguel
 */
 
 #include "asm.h"
@@ -23,8 +23,9 @@ int	check_live(char *str, t_list *list)
 
   c = 1;
   args = my_str_sep(str, SEPARATOR_CHAR);
-  live = malloc(sizeof(t_inst));
-  live->name = my_strn_dup(&c, 1);
+  if ((live = malloc(sizeof(t_inst))) == NULL)
+    return (84);
+  live->name = my_strndup(&c, 1);
   if (is_dir(args[0]) != 1 || my_getnbr(&args[0][1]) < 0 || args[1] != NULL)
     return (0);
   return (fill_instruction(str, live, list));
@@ -37,9 +38,10 @@ int	check_ld(char *str, t_list *list, char nme)
   char		**args;
 
   i = 0;
-  ld = malloc(sizeof(t_inst));
+  if ((ld = malloc(sizeof(t_inst))) == NULL)
+    return (84);
   args = my_str_sep(str, SEPARATOR_CHAR);
-  ld->name = my_strn_dup(&nme, 1);
+  ld->name = my_strndup(&nme, 1);
   if (str == NULL)
     return (0);
   while (args[i] != NULL) {
@@ -63,8 +65,9 @@ int	check_st(char *str, t_list *list)
 
   i = 0;
   c = 3;
-  st = malloc(sizeof(t_inst));
-  st->name = my_strn_dup(&c, 1);
+  if ((st = malloc(sizeof(t_inst))) == NULL)
+    return (84);
+  st->name = my_strndup(&c, 1);
   if (str == NULL)
     return (0);
   args = my_str_sep(str, SEPARATOR_CHAR);
@@ -88,7 +91,8 @@ int	check_add_sub(char *str, t_list *list, char nme)
   t_inst	*add_sub;
 
   i = 0;
-  add_sub = malloc(sizeof(t_inst));
+  if ((add_sub = malloc(sizeof(t_inst))) == NULL)
+    return (84);
   add_sub->name = my_char_cat("", nme);
   args = my_str_sep(str, SEPARATOR_CHAR);
   if (str == NULL)
@@ -110,8 +114,9 @@ int	check_and(char *str, t_list *list, char nme)
   t_inst	*and;
 
   x = 0;
-  and = malloc(sizeof(t_inst));
-  and->name = my_strn_dup(&nme, 1);
+  if ((and = malloc(sizeof(t_inst))) == NULL)
+    return (84);
+  and->name = my_strndup(&nme, 1);
   if (str == NULL)
     return (0);
   args = my_str_sep(str, SEPARATOR_CHAR);

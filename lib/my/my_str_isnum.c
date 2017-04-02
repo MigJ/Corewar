@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 **
 ** Started on  Tue Oct 11 11:08:31 2016 Kévin Laspougeas
-** Last update Tue Mar 28 03:51:36 2017 Kévin Laspougeas
+** Last update Sun Apr  2 17:33:41 2017 Joubert Miguel
 */
 
 #include "my.h"
@@ -29,20 +29,3 @@ int	my_str_isnum(char *str)
     }
   return (0);
 }
-
-/* int	my_str_isnum(char *str) */
-/* { */
-/*   int	i; */
-/*   i = 0; */
-/*   if (str) */
-/*     { */
-/*       while (str[i]) */
-/* 	{ */
-/* 	  if (str[i] < '0' || str[i] > '9') */
-/* 	    return (0); */
-/* 	  i++; */
-/* 	} */
-/*       return (1); */
-/*     } */
-/*   return (0); */
-/* } */

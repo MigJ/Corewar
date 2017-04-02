@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar  6 18:25:42 2017 Kévin Laspougeas
-** Last update Sat Apr  1 17:45:40 2017 Kévin Laspougeas
+** Last update Sun Apr  2 17:22:02 2017 Joubert Miguel
 */
 
 #ifndef		__ASM_H__
@@ -16,6 +16,17 @@
 # include "my.h"
 # include "get_next_line.h"
 # include "op.h"
+
+typedef struct s_content
+{
+  char                  *new_args;
+  char                  **argus;
+  char                  *sbs;
+  char                  pos;
+  int                   i;
+  int                   j;
+  int                   l;
+}t_content;
 
 typedef struct	s_instruct
 {
@@ -69,7 +80,8 @@ char		*my_str_cat(char*, char*);
 char		*my_char_cat(char *, char);
 int		my_get_nbr(char *str);
 int		my_sign(char *str);
-char		*my_strn_dup(char *, int);
+t_content               init_content(t_content cont, char *line,
+				     t_inst *inst);
 
 /*
 **		CHAINED LISTS
@@ -94,7 +106,6 @@ int		ret_oct_from_line(char *line);
 int		is_dir(char *line);
 int		is_reg(char *line);
 int		is_ind(char *line);
-char		*my_memset(int);
 char		**my_strsep(char *str, char sep);
 void		fill_labels(t_list *list);
 char		*int_to_char(char *hex, int nb, int *j);

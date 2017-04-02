@@ -5,7 +5,7 @@
 ** Login   <miguel.joubert@epitech.eu>
 ** 
 ** Started on  Wed Mar 15 13:06:25 2017 Joubert Miguel
-** Last update Sat Apr  1 13:14:31 2017 Joubert Miguel
+** Last update Sun Apr  2 17:05:42 2017 Joubert Miguel
 */
 
 #include "asm.h"
@@ -46,4 +46,33 @@ char		*epu(char *s)
     return (str);
   }
   return (NULL);
+}
+
+char	**my_str_sep(char *str, char sep)
+{
+  char  **arr;
+  int   i;
+  int   j;
+  int   k;
+
+  if (!str) return (NULL);
+  if ((arr = malloc(sizeof(char *) * 100)) == NULL)
+    exit (84);
+  i = j = k = 0;
+  while (i < 100)
+    arr[i++] = my_memset(10000);
+  i = 0;
+  while (str[i])
+    {
+      if (str[i] == COMMENT_CHAR) break;
+      if (str[i] == sep)
+	{
+	  i++, j++;
+	  k = 0;
+	}
+      arr[j][k] = str[i];
+      k++, i++;
+    }
+  arr[++j] = NULL;
+  return (arr);
 }

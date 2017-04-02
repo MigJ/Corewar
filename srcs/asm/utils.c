@@ -5,30 +5,13 @@
 ** Login   <miguel.joubert@epitech.eu>
 ** 
 ** Started on  Mon Mar 27 22:35:07 2017 Joubert Miguel
-** Last update Sat Apr  1 15:32:13 2017 Joubert Miguel
+** Last update Sun Apr  2 17:05:22 2017 Joubert Miguel
 */
 
 #include <stdlib.h>
 #include "asm.h"
 
-char    *my_strn_dup(char *src, int n)
-{
-  char  *ret;
-  int   i;
-
-  if (src != NULL)
-    {
-      i = -1;
-      ret = my_memset(n + 2 * 10);
-      while (++i < n)
-	ret[i] = src[i];
-      ret[i] = '\0';
-      return (ret);
-    }
-  return (NULL);
-}
-
-int     my_sign(char *str)
+int	my_sign(char *str)
 {
   int   i;
 
@@ -40,7 +23,7 @@ int     my_sign(char *str)
   return (i % 2);
 }
 
-int     my_get_nbr(char *str)
+int	my_get_nbr(char *str)
 {
   int   i;
   int   sign;
@@ -64,7 +47,7 @@ int     my_get_nbr(char *str)
   return (nb);
 }
 
-char    *my_memset(int size)
+char	*my_memset(int size)
 {
   char  *str;
   int   i;
@@ -77,38 +60,7 @@ char    *my_memset(int size)
   return (str);
 }
 
-char    **my_str_sep(char *str, char sep)
-{
-  char  **arr;
-  int   i;
-  int   j;
-  int   k;
-
-  if (!str)
-    return (NULL);
-  if ((arr = malloc(sizeof(char *) * 100)) == NULL)
-    exit (84);
-  i = j = k = 0;
-  while (i < 100)
-    arr[i++] = my_memset(10000);
-  i = 0;
-  while (str[i])
-    {
-      if (str[i] == COMMENT_CHAR)
-	break;
-      if (str[i] == sep)
-	{
-	  i++, j++;
-	  k = 0;
-	}
-      arr[j][k] = str[i];
-      k++, i++;
-    }
-  arr[++j] = NULL;
-  return (arr);
-}
-
-char    *my_str_cat(char *dest, char *src)
+char	*my_str_cat(char *dest, char *src)
 {
   char  *res;
   int   i;

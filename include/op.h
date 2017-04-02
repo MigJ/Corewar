@@ -5,7 +5,7 @@
 ** Login   <astek@epitech.net>
 **
 ** Started on  Mon Mar 30 11:14:31 2009 Astek
-** Last update Mon Mar  6 17:38:32 2017 Kévin Laspougeas
+** Last update Sat Apr  1 18:20:46 2017 Joubert Miguel
 */
 
 #ifndef _OP_H_
@@ -78,9 +78,9 @@ struct header_s
 {
    int  magic;
 # define COREWAR_EXEC_MAGIC      0xea83f3        /* why not */
-   char prog_name[PROG_NAME_LENGTH+1];
+  char	*prog_name;
    int  prog_size;
-   char comment[COMMENT_LENGTH+1];
+  char	*comment;
 };
 
 typedef struct header_s header_t;
