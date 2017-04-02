@@ -5,7 +5,7 @@
 ** Login   <laspou_k@epitech.net>
 ** 
 ** Started on  Mon Mar 27 23:54:16 2017 Kévin Laspougeas
-** Last update Sat Apr  1 18:33:23 2017 Kévin Laspougeas
+** Last update Sun Apr  2 16:41:11 2017 Kévin Laspougeas
 */
 
 #include "asm.h"
@@ -50,7 +50,7 @@ int	check_ldi(char *str, t_list *list, char nme)
     else if (x == 1 && !is_dir(args[x]) && !is_reg(args[x]) &&
 	     !is_label(args[x]))
       return (0);
-    else if (x == 2 && !is_reg(args[x]) && !is_dir(args[x]))
+    else if (x == 2 && !is_reg(args[x]))
       return (0);
     x++;
   }
